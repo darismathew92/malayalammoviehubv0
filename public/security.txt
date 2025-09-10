@@ -1,0 +1,6 @@
+Contact: mailto:security@malayalammovieshub.com
+Expires: 2025-12-31T23:59:59.000Z
+Encryption: https://malayalammovieshub.com/pgp-key.txt
+Preferred-Languages: en, ml
+Canonical: https://malayalammovieshub.com/.well-known/security.txt
+Policy: https://malayalammovieshub.com/security-policy

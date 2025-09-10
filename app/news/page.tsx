@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { MobileNav } from "@/components/mobile-nav"
+import DesktopNav from "@/components/desktop-nav"
 
 const newsArticles = [
   {
@@ -95,38 +96,45 @@ export default function NewsPage() {
 
       <main className="flex-1">
         <section className="container mx-auto px-4 py-6 lg:py-10">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Malayalam Cinema News</h1>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <div className="text-center mb-6 md:mb-8">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
+              Malayalam Cinema News
+            </h1>
+            <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto px-2">
               Quick updates and latest happenings in Malayalam film industry.
             </p>
           </div>
 
-          {/* News Grid */}
-          <div className="grid gap-4 md:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="mb-8">
+            <DesktopNav />
+          </div>
+
+          <div className="grid gap-3 md:gap-4 lg:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {newsArticles.map((article) => (
               <Link key={article.id} href={`/news/${article.id}`}>
-                <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer">
-                  <div className="aspect-video overflow-hidden">
+                <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all duration-200 active:scale-[0.98] cursor-pointer">
+                  <div className="aspect-[16/10] overflow-hidden">
                     <img
                       src={article.image || "/placeholder.svg"}
                       alt={article.title}
                       className="h-full w-full object-cover transition-transform hover:scale-105"
                     />
                   </div>
-                  <div className="p-4">
+                  <div className="p-3 md:p-4">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
+                      <span className="px-2 py-1 bg-blue-50 text-blue-700 text-xs font-medium rounded-full">
                         {article.category}
                       </span>
                     </div>
-                    <h3 className="text-sm md:text-base font-semibold leading-tight line-clamp-2 mb-2">
+                    <h3 className="text-sm md:text-base font-semibold leading-snug line-clamp-2 mb-2 text-gray-900">
                       {article.title}
                     </h3>
-                    <p className="text-xs md:text-sm text-gray-600 mb-3 line-clamp-2">{article.excerpt}</p>
+                    <p className="text-xs md:text-sm text-gray-600 mb-3 line-clamp-2 leading-relaxed">
+                      {article.excerpt}
+                    </p>
                     <div className="flex items-center justify-between text-xs text-gray-500">
-                      <span className="truncate">{article.author}</span>
-                      <span>
+                      <span className="truncate font-medium">{article.author}</span>
+                      <span className="flex-shrink-0 ml-2">
                         {new Date(article.date).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
                       </span>
                     </div>

@@ -1,8 +1,4 @@
 import Link from "next/link"
-import { ArrowLeft, Calendar, User, Share2 } from "lucide-react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 import { notFound } from "next/navigation"
 
 const newsArticles = [
@@ -56,39 +52,47 @@ export default function NewsDetailPage({ params }: NewsDetailPageProps) {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-10 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between py-4">
-          <Link href="/news" className="flex items-center gap-2 hover:opacity-80">
-            <ArrowLeft className="h-4 w-4" />
-            <span className="text-sm font-medium">Back to News</span>
-          </Link>
-          <Link href="/" className="flex items-center gap-2">
-            <span className="text-lg md:text-xl font-bold">Malayalam Movies Hub</span>
-          </Link>
-          <Button variant="outline" size="sm" className="flex items-center gap-2 bg-transparent">
-            <Share2 className="h-4 w-4" />
-            <span className="hidden sm:inline">Share</span>
-          </Button>
+      <header className="sticky top-0 z-50 bg-white border-b shadow-sm">
+        <div className="container mx-auto px-4">
+          <div className="flex h-14 md:h-16 items-center justify-between">
+            <Link href="/news" className="flex items-center gap-2 hover:opacity-80 min-w-0">
+              <span className="text-lg">←</span>
+              <span className="text-sm font-medium truncate">Back</span>
+            </Link>
+            <Link href="/" className="flex items-center gap-2 min-w-0">
+              <div className="w-7 h-7 md:w-8 md:h-8 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-sm md:text-lg">M</span>
+              </div>
+              <span className="text-base md:text-lg font-bold text-gray-900 hidden sm:block truncate">
+                Malayalam Movies Hub
+              </span>
+            </Link>
+            <button className="flex items-center gap-1 px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium transition-colors">
+              <span className="text-base">↗</span>
+              <span className="hidden sm:inline">Share</span>
+            </button>
+          </div>
         </div>
       </header>
 
       <main className="flex-1">
-        <article className="container py-6 md:py-10 max-w-4xl mx-auto">
-          {/* Article Header */}
-          <div className="mb-6 md:mb-8">
-            <div className="flex items-center gap-2 mb-4">
-              <Badge variant="outline">{article.category}</Badge>
-              <div className="flex items-center gap-4 text-sm text-muted-foreground">
+        <article className="container px-4 py-4 md:py-6 lg:py-10 max-w-4xl mx-auto">
+          <div className="mb-4 md:mb-6 lg:mb-8">
+            <div className="flex flex-wrap items-center gap-2 mb-3 md:mb-4">
+              <span className="px-2.5 py-1 bg-blue-50 text-blue-700 text-xs font-medium rounded-full">
+                {article.category}
+              </span>
+              <div className="flex flex-wrap items-center gap-3 text-xs md:text-sm text-gray-500">
                 <div className="flex items-center gap-1">
-                  <User className="h-4 w-4" />
+                  <span className="text-sm">👤</span>
                   <span>{article.author}</span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <Calendar className="h-4 w-4" />
+                  <span className="text-sm">📅</span>
                   <span>
                     {new Date(article.date).toLocaleDateString("en-US", {
                       year: "numeric",
-                      month: "long",
+                      month: "short",
                       day: "numeric",
                     })}
                   </span>
@@ -96,14 +100,15 @@ export default function NewsDetailPage({ params }: NewsDetailPageProps) {
               </div>
             </div>
 
-            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight mb-4">{article.title}</h1>
+            <h1 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold tracking-tight mb-3 md:mb-4 leading-tight text-gray-900">
+              {article.title}
+            </h1>
 
-            <p className="text-lg text-muted-foreground leading-relaxed">{article.excerpt}</p>
+            <p className="text-base md:text-lg text-gray-600 leading-relaxed">{article.excerpt}</p>
           </div>
 
-          {/* Featured Image */}
-          <div className="mb-6 md:mb-8">
-            <Card className="overflow-hidden">
+          <div className="mb-4 md:mb-6 lg:mb-8">
+            <div className="overflow-hidden rounded-xl bg-gray-100">
               <div className="aspect-video overflow-hidden">
                 <img
                   src={article.image || "/placeholder.svg"}
@@ -111,28 +116,26 @@ export default function NewsDetailPage({ params }: NewsDetailPageProps) {
                   className="h-full w-full object-cover"
                 />
               </div>
-            </Card>
+            </div>
           </div>
 
-          {/* Article Content */}
-          <div className="prose prose-gray dark:prose-invert max-w-none">
+          <div className="prose prose-gray max-w-none">
             {article.content.split("\n\n").map((paragraph, index) => (
-              <p key={index} className="mb-4 text-base leading-relaxed">
+              <p key={index} className="mb-4 text-sm md:text-base leading-relaxed text-gray-700">
                 {paragraph}
               </p>
             ))}
           </div>
 
-          {/* Related Articles */}
-          <div className="mt-12 pt-8 border-t">
-            <h3 className="text-xl font-semibold mb-6">Related News</h3>
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-8 md:mt-12 pt-6 md:pt-8 border-t border-gray-200">
+            <h3 className="text-lg md:text-xl font-semibold mb-4 md:mb-6 text-gray-900">Related News</h3>
+            <div className="grid gap-3 md:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
               {newsArticles
                 .filter((item) => item.id !== article.id)
                 .slice(0, 3)
                 .map((relatedArticle) => (
                   <Link key={relatedArticle.id} href={`/news/${relatedArticle.id}`}>
-                    <Card className="overflow-hidden hover:shadow-lg transition-shadow">
+                    <div className="bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-md transition-all duration-200 active:scale-[0.98]">
                       <div className="aspect-video overflow-hidden">
                         <img
                           src={relatedArticle.image || "/placeholder.svg"}
@@ -140,14 +143,16 @@ export default function NewsDetailPage({ params }: NewsDetailPageProps) {
                           className="h-full w-full object-cover transition-transform hover:scale-105"
                         />
                       </div>
-                      <CardContent className="p-4">
-                        <Badge variant="outline" className="text-xs mb-2">
+                      <div className="p-3 md:p-4">
+                        <span className="inline-block px-2 py-1 bg-blue-50 text-blue-700 text-xs font-medium rounded-full mb-2">
                           {relatedArticle.category}
-                        </Badge>
-                        <h4 className="font-medium text-sm leading-tight line-clamp-2 mb-2">{relatedArticle.title}</h4>
-                        <p className="text-xs text-muted-foreground line-clamp-2">{relatedArticle.excerpt}</p>
-                      </CardContent>
-                    </Card>
+                        </span>
+                        <h4 className="font-semibold text-sm leading-tight line-clamp-2 mb-2 text-gray-900">
+                          {relatedArticle.title}
+                        </h4>
+                        <p className="text-xs text-gray-600 line-clamp-2 leading-relaxed">{relatedArticle.excerpt}</p>
+                      </div>
+                    </div>
                   </Link>
                 ))}
             </div>
@@ -155,19 +160,9 @@ export default function NewsDetailPage({ params }: NewsDetailPageProps) {
         </article>
       </main>
 
-      <footer className="border-t py-4 md:py-6">
-        <div className="container flex flex-col items-center justify-between gap-4 md:h-16 md:flex-row">
-          <p className="text-center text-xs md:text-sm leading-loose text-muted-foreground md:text-left">
-            © 2024 Malayalam Movies Hub. All rights reserved.
-          </p>
-          <div className="flex items-center gap-4">
-            <Link href="#" className="text-xs md:text-sm text-muted-foreground hover:underline">
-              Privacy Policy
-            </Link>
-            <Link href="#" className="text-xs md:text-sm text-muted-foreground hover:underline">
-              Terms of Service
-            </Link>
-          </div>
+      <footer className="bg-gray-50 border-t py-4 md:py-6">
+        <div className="container mx-auto px-4 text-center">
+          <p className="text-xs md:text-sm text-gray-600">© 2024 Malayalam Movies Hub. All rights reserved.</p>
         </div>
       </footer>
     </div>

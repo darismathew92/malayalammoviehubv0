@@ -71,6 +71,14 @@ export const metadata: Metadata = {
   verification: {
     google: "your-google-verification-code",
   },
+  category: "Entertainment",
+  classification: "Movies & Entertainment",
+  other: {
+    "theme-color": "#3b82f6",
+    "mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "default",
+  },
     generator: 'v0.app'
 }
 
@@ -85,47 +93,89 @@ export default function RootLayout({
         <Script
           id="structured-data"
           type="application/ld+json"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "WebSite",
-              name: "Malayalam Movies Hub",
-              description: "Discover the latest Malayalam movies released on OTT platforms",
-              url: "https://malayalammovieshub.com",
-              potentialAction: {
-                "@type": "SearchAction",
-                target: "https://malayalammovieshub.com/search?q={search_term_string}",
-                "query-input": "required name=search_term_string",
-              },
-              publisher: {
-                "@type": "Organization",
-                name: "Malayalam Movies Hub",
-                url: "https://malayalammovieshub.com",
-              },
+              "@graph": [
+                {
+                  "@type": "WebSite",
+                  "@id": "https://malayalammovieshub.com/#website",
+                  name: "Malayalam Movies Hub",
+                  description: "Discover the latest Malayalam movies released on OTT platforms",
+                  url: "https://malayalammovieshub.com",
+                  inLanguage: "en-US",
+                  potentialAction: {
+                    "@type": "SearchAction",
+                    target: "https://malayalammovieshub.com/search?q={search_term_string}",
+                    "query-input": "required name=search_term_string",
+                  },
+                  publisher: {
+                    "@type": "Organization",
+                    "@id": "https://malayalammovieshub.com/#organization",
+                    name: "Malayalam Movies Hub",
+                    url: "https://malayalammovieshub.com",
+                    logo: {
+                      "@type": "ImageObject",
+                      url: "https://malayalammovieshub.com/logo.png",
+                      width: 512,
+                      height: 512,
+                    },
+                    sameAs: [
+                      "https://twitter.com/malayalammovieshub",
+                      "https://facebook.com/malayalammovieshub",
+                      "https://instagram.com/malayalammovieshub",
+                    ],
+                  },
+                },
+                {
+                  "@type": "Organization",
+                  "@id": "https://malayalammovieshub.com/#organization",
+                  name: "Malayalam Movies Hub",
+                  url: "https://malayalammovieshub.com",
+                  logo: {
+                    "@type": "ImageObject",
+                    url: "https://malayalammovieshub.com/logo.png",
+                    width: 512,
+                    height: 512,
+                  },
+                  contactPoint: {
+                    "@type": "ContactPoint",
+                    contactType: "customer service",
+                    availableLanguage: ["English", "Malayalam"],
+                  },
+                },
+              ],
             }),
           }}
         />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://www.omdbapi.com" />
+        <link rel="preconnect" href="https://img.youtube.com" />
+
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#3b82f6" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+        <link rel="dns-prefetch" href="//pl26236383.revenuecpmgate.com" />
+        <link rel="dns-prefetch" href="//www.revenuecpmgate.com" />
       </head>
       <body>
         <Suspense fallback={null}>{children}</Suspense>
 
-        {/* <Analytics /> */}
-
-        {/* --- Second ad block --- */}
         <div id="container-4a1d554af74a536a78f81ec11493b477"></div>
         <Script
           id="second-ad-script"
           src="//pl26236383.revenuecpmgate.com/4a1d554af74a536a78f81ec11493b477/invoke.js"
-          async
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
 
-        {/* --- Third ad block (direct include) --- */}
         <Script
           id="third-ad-script"
           src="https://www.revenuecpmgate.com/yfu7frp41?key=1a7e2ea822949b8353d7917b83390165"
-          async
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
       </body>
     </html>
