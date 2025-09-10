@@ -122,38 +122,42 @@ export default function WatchlistPage() {
             </p>
           </div>
 
-          <nav className="flex justify-center gap-4 mb-8" aria-label="Movie categories">
-            <Link
-              href="/"
-              className="px-4 py-2 rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/80"
-            >
-              OTT Releases
-            </Link>
-            <Link
-              href="/upcoming"
-              className="px-4 py-2 rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/80"
-            >
-              Theater Releases
-            </Link>
-            <Link
-              href="/youtube"
-              className="px-4 py-2 rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/80"
-            >
-              YouTube Movies
-            </Link>
-            <Link
-              href="/trailers"
-              className="px-4 py-2 rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/80"
-            >
-              Trailers
-            </Link>
-            <Link
-              href="/watchlist"
-              className="px-4 py-2 rounded-md bg-primary text-primary-foreground hover:bg-primary/90"
-              aria-current="page"
-            >
-              My Watchlist
-            </Link>
+          <nav className="mb-8" aria-label="Movie categories">
+            <div className="flex justify-center">
+              <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-2 px-4 sm:px-0 max-w-full">
+                <Link
+                  href="/"
+                  className="flex-shrink-0 px-3 py-2 text-sm font-medium rounded-lg bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors"
+                >
+                  OTT Releases
+                </Link>
+                <Link
+                  href="/upcoming"
+                  className="flex-shrink-0 px-3 py-2 text-sm font-medium rounded-lg bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors"
+                >
+                  Theater Releases
+                </Link>
+                <Link
+                  href="/youtube"
+                  className="flex-shrink-0 px-3 py-2 text-sm font-medium rounded-lg bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors"
+                >
+                  YouTube Movies
+                </Link>
+                <Link
+                  href="/trailers"
+                  className="flex-shrink-0 px-3 py-2 text-sm font-medium rounded-lg bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors"
+                >
+                  Trailers
+                </Link>
+                <Link
+                  href="/watchlist"
+                  className="flex-shrink-0 px-3 py-2 text-sm font-medium rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+                  aria-current="page"
+                >
+                  My Watchlist
+                </Link>
+              </div>
+            </div>
           </nav>
 
           {watchlist.length > 0 && (
