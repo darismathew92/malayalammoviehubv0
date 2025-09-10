@@ -304,14 +304,12 @@ export default function MovieGrid() {
               </DialogHeader>
               <div className="grid gap-4">
                 <div className="flex items-start gap-4">
-                  <OptimizedImage
+                  <img
                     src={
                       selectedMovie.Poster !== "N/A" ? selectedMovie.Poster : "/placeholder.svg?height=400&width=300"
                     }
                     alt={selectedMovie.Title}
-                    width={96}
-                    height={128}
-                    className="w-24 h-32 rounded-md"
+                    className="w-24 h-32 object-cover rounded-md"
                   />
                   <div>
                     <p className="text-sm">{selectedMovie.Plot}</p>
