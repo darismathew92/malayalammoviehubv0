@@ -14,6 +14,8 @@ import { OptimizedImage } from "@/components/optimized-image"
 import { useWatchlist } from "@/hooks/use-watchlist"
 import { WatchlistButton } from "@/components/watchlist-button"
 import RandomMovieGenerator from "@/components/random-movie-generator"
+import MobileNav from "@/components/mobile-nav"
+import DesktopNav from "@/components/desktop-nav"
 import type { WatchlistItem } from "@/lib/watchlist"
 import Script from "next/script"
 
@@ -87,7 +89,7 @@ export default function WatchlistPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-gray-50">
       <Script
         id="watchlist-schema"
         type="application/ld+json"
@@ -102,63 +104,39 @@ export default function WatchlistPage() {
         }}
       />
 
-      <header className="sticky top-0 z-10 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-center py-4">
-          <div className="flex items-center gap-2">
-            <Link href="/" className="flex items-center gap-2">
-              <span className="text-xl font-bold">Malayalam Movies Hub</span>
-            </Link>
-            <RandomMovieGenerator />
+      <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex h-16 items-center justify-between">
+            <div className="flex items-center gap-3">
+              <Link href="/" className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center shadow-sm">
+                  <span className="text-white font-bold text-sm">M</span>
+                </div>
+                <span className="text-lg md:text-xl font-bold text-gray-900">Malayalam Movies Hub</span>
+              </Link>
+              <div className="hidden sm:block">
+                <RandomMovieGenerator />
+              </div>
+            </div>
+            <MobileNav />
           </div>
         </div>
       </header>
 
       <main className="flex-1">
-        <section className="container py-6 md:py-10" aria-label="My Watchlist">
-          <div className="flex flex-col gap-4 text-center mb-8">
-            <h1 className="text-3xl font-bold tracking-tight">My Watchlist</h1>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8 lg:py-12" aria-label="My Watchlist">
+          <div className="text-center mb-8 md:mb-12">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 leading-tight">
+              My Watchlist
+            </h1>
+            <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Keep track of Malayalam movies, trailers, and YouTube content you want to watch across all platforms.
             </p>
           </div>
 
-          <nav className="mb-8" aria-label="Movie categories">
-            <div className="flex justify-center">
-              <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-2 px-4 sm:px-0 max-w-full">
-                <Link
-                  href="/"
-                  className="flex-shrink-0 px-3 py-2 text-sm font-medium rounded-lg bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors"
-                >
-                  OTT Releases
-                </Link>
-                <Link
-                  href="/upcoming"
-                  className="flex-shrink-0 px-3 py-2 text-sm font-medium rounded-lg bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors"
-                >
-                  Theater Releases
-                </Link>
-                <Link
-                  href="/youtube"
-                  className="flex-shrink-0 px-3 py-2 text-sm font-medium rounded-lg bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors"
-                >
-                  YouTube Movies
-                </Link>
-                <Link
-                  href="/trailers"
-                  className="flex-shrink-0 px-3 py-2 text-sm font-medium rounded-lg bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors"
-                >
-                  Trailers
-                </Link>
-                <Link
-                  href="/watchlist"
-                  className="flex-shrink-0 px-3 py-2 text-sm font-medium rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
-                  aria-current="page"
-                >
-                  My Watchlist
-                </Link>
-              </div>
-            </div>
-          </nav>
+          <div className="mb-8">
+            <DesktopNav />
+          </div>
 
           {watchlist.length > 0 && (
             <div className="flex justify-center mb-6">
@@ -337,18 +315,20 @@ export default function WatchlistPage() {
         </section>
       </main>
 
-      <footer className="border-t py-6 md:py-0">
-        <div className="container flex flex-col items-center justify-between gap-4 md:h-16 md:flex-row">
-          <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
-            © 2024 Malayalam Movies Hub. All rights reserved.
-          </p>
-          <div className="flex items-center gap-4">
-            <Link href="#" className="text-sm text-muted-foreground hover:underline">
-              Privacy Policy
-            </Link>
-            <Link href="#" className="text-sm text-muted-foreground hover:underline">
-              Terms of Service
-            </Link>
+      <footer className="bg-white border-t border-gray-200 mt-auto">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-gray-600 text-center md:text-left">
+              © 2024 Malayalam Movies Hub. All rights reserved.
+            </p>
+            <div className="flex items-center gap-6">
+              <Link href="#" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                Privacy Policy
+              </Link>
+              <Link href="#" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                Terms of Service
+              </Link>
+            </div>
           </div>
         </div>
       </footer>

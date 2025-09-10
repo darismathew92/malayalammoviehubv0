@@ -1,11 +1,13 @@
 import Link from "next/link"
 import MovieGrid from "@/components/movie-grid"
 import RandomMovieGenerator from "@/components/random-movie-generator"
+import MobileNav from "@/components/mobile-nav"
+import DesktopNav from "@/components/desktop-nav"
 import Script from "next/script"
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-gray-50">
       <Script
         id="movie-collection-schema"
         type="application/ld+json"
@@ -25,90 +27,62 @@ export default function Home() {
         }}
       />
 
-      <header className="sticky top-0 z-10 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-center py-4">
-          <div className="flex items-center gap-2">
-            <Link href="/" className="flex items-center gap-2">
-              <span className="text-lg md:text-xl font-bold">Malayalam Movies Hub</span>
-            </Link>
-            <div>
-              <RandomMovieGenerator />
+      <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex h-16 items-center justify-between">
+            <div className="flex items-center gap-3">
+              <Link href="/" className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center shadow-sm">
+                  <span className="text-white font-bold text-sm">M</span>
+                </div>
+                <span className="text-lg md:text-xl font-bold text-gray-900">Malayalam Movies Hub</span>
+              </Link>
+              <div className="hidden sm:block">
+                <RandomMovieGenerator />
+              </div>
             </div>
+            <MobileNav />
           </div>
         </div>
       </header>
 
       <main className="flex-1">
-        <section className="container py-4 md:py-6 lg:py-10" aria-label="Latest Malayalam Movies">
-          <div className="flex flex-col gap-2 md:gap-4 text-center mb-6 md:mb-8">
-            <h1 className="text-xl md:text-2xl lg:text-3xl font-bold tracking-tight px-4 md:px-0">
+        <section
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8 lg:py-12"
+          aria-label="Latest Malayalam Movies"
+        >
+          <div className="text-center mb-8 md:mb-12">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 leading-tight">
               Latest OTT Released Malayalam Movies September 2025
             </h1>
-            <p className="text-sm md:text-base lg:text-lg text-muted-foreground max-w-3xl mx-auto px-4 md:px-0">
+            <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Discover the newest Malayalam films available on popular streaming platforms like Netflix, Amazon Prime
               Video, Disney+ Hotstar, and more.
             </p>
           </div>
 
-          <nav
-            className="flex justify-start md:justify-center gap-2 md:gap-4 mb-6 md:mb-8 overflow-x-auto pb-2 px-4 md:px-0"
-            aria-label="Movie categories"
-          >
-            <Link
-              href="/"
-              className="px-3 py-2 md:px-4 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 whitespace-nowrap text-sm md:text-base"
-              aria-current="page"
-            >
-              OTT Releases
-            </Link>
-            <Link
-              href="/upcoming"
-              className="px-3 py-2 md:px-4 rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/80 whitespace-nowrap text-sm md:text-base"
-            >
-              Theater Releases
-            </Link>
-            <Link
-              href="/youtube"
-              className="px-3 py-2 md:px-4 rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/80 whitespace-nowrap text-sm md:text-base"
-            >
-              YouTube Movies
-            </Link>
-            <Link
-              href="/trailers"
-              className="px-3 py-2 md:px-4 rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/80 whitespace-nowrap text-sm md:text-base"
-            >
-              Trailers
-            </Link>
-            <Link
-              href="/watchlist"
-              className="px-3 py-2 md:px-4 rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/80 whitespace-nowrap text-sm md:text-base"
-            >
-              My Watchlist
-            </Link>
-            <Link
-              href="/news"
-              className="px-3 py-2 md:px-4 rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/80 whitespace-nowrap text-sm md:text-base"
-            >
-              News
-            </Link>
-          </nav>
+          <div className="mb-8">
+            <DesktopNav />
+          </div>
 
           <MovieGrid />
         </section>
       </main>
 
-      <footer className="border-t py-4 md:py-6">
-        <div className="container flex flex-col items-center justify-between gap-4 md:h-16 md:flex-row">
-          <p className="text-center text-xs md:text-sm leading-loose text-muted-foreground md:text-left">
-            © 2024 Malayalam Movies Hub. All rights reserved.
-          </p>
-          <div className="flex items-center gap-4">
-            <Link href="#" className="text-xs md:text-sm text-muted-foreground hover:underline">
-              Privacy Policy
-            </Link>
-            <Link href="#" className="text-xs md:text-sm text-muted-foreground hover:underline">
-              Terms of Service
-            </Link>
+      <footer className="bg-white border-t border-gray-200 mt-auto">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-gray-600 text-center md:text-left">
+              © 2024 Malayalam Movies Hub. All rights reserved.
+            </p>
+            <div className="flex items-center gap-6">
+              <Link href="#" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                Privacy Policy
+              </Link>
+              <Link href="#" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                Terms of Service
+              </Link>
+            </div>
           </div>
         </div>
       </footer>
