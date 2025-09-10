@@ -8,6 +8,7 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Badge } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
+import { WatchlistButton } from "@/components/watchlist-button"
 
 import { getMovieDetails, getSpecificMovies, type Movie, type MovieDetails } from "@/lib/api"
 
@@ -142,6 +143,21 @@ export default function UpcomingMovieGrid() {
                       <Badge className={`${getTheaterColor(movie.theater)} text-white`}>{movie.theater}</Badge>
                     </div>
                   )}
+                  <div className="absolute top-2 left-2">
+                    <WatchlistButton
+                      item={{
+                        id: movie.id,
+                        title: movie.title,
+                        year: movie.year,
+                        poster: movie.poster,
+                        type: "upcoming",
+                        theater: movie.theater,
+                        releaseDate: movie.releaseDate,
+                      }}
+                      showText={false}
+                      size="sm"
+                    />
+                  </div>
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
                     <h3 className="font-bold text-white text-lg">{movie.title}</h3>
                     <div className="flex items-center gap-2 text-white/80 text-sm mt-1">

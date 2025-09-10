@@ -1,21 +1,23 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import React from "react"
+
+import { useState, useEffect, useMemo, useCallback } from "react"
 import { Calendar, Info, Star, Film, Play } from "lucide-react"
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden"; // Import VisuallyHidden
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Badge } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
+import { OptimizedImage } from "@/components/optimized-image"
+import { WatchlistButton } from "@/components/watchlist-button"
 
 import { getMovieDetails, getSpecificMovies, type Movie, type MovieDetails } from "@/lib/api"
 
 // Movie list with platform information
 const MOVIE_LIST = [
-
-  // Newly added movies
   { title: "Flask", platform: "Manorama Max" },
   { title: "Raveendra Nee Evide?", platform: "Saina Play, Prime Video" },
   { title: "Kammattam", platform: "ZEE5" },
@@ -33,19 +35,15 @@ const MOVIE_LIST = [
   { title: "Padakkalam", platform: "Jio Hotstar" },
   { title: "Thudarum", platform: "Jio Hotstar" },
   { title: "Abhilasham", platform: "Prime Video, Manorama Max" },
-
   { title: "Ponman", platform: "Disney+ Hotstar" },
   { title: "Officer on Duty", platform: "Netflix" },
   { title: "Manjummel Boys", platform: "Disney+ Hotstar" },
   { title: "Premalu", platform: "Disney+ Hotstar" },
   { title: "Aavesham", platform: "Amazon Prime" },
   { title: "Bramayugam", platform: "SonyLIV" },
-  { title: "Guruvayoor Ambalanadayil", platform: "Disney+ Hotstar" }
+  { title: "Guruvayoor Ambalanadayil", platform: "Disney+ Hotstar" },
+] as const
 
-];
-
-
-// Platform colors for badges
 const PLATFORM_COLORS: Record<string, string> = {
   Netflix: "bg-red-600 hover:bg-red-700",
   "Amazon Prime": "bg-blue-600 hover:bg-blue-700",
@@ -55,6 +53,79 @@ const PLATFORM_COLORS: Record<string, string> = {
   "Apple TV+": "bg-gray-800 hover:bg-gray-900",
 }
 
+const MovieCard = React.memo(
+  ({
+    movie,
+    onMovieClick,
+    getPlatformColor,
+  }: {
+    movie: Movie & { platform?: string }
+    onMovieClick: (movie: Movie & { platform?: string }) => void
+    getPlatformColor: (platform: string) => string
+  }) => (
+    <Card className="overflow-hidden">
+      <CardHeader className="p-0">
+        <div className="aspect-[3/4] relative">
+          <OptimizedImage
+            src={movie.poster || "/placeholder.svg"}
+            alt={movie.title}
+            width={300}
+            height={400}
+            className="w-full h-full"
+          />
+          {movie.platform && (
+            <div className="absolute top-2 right-2">
+              <Badge className={`${getPlatformColor(movie.platform)} text-white`}>{movie.platform}</Badge>
+            </div>
+          )}
+          <div className="absolute top-2 left-2">
+            <WatchlistButton
+              item={{
+                id: movie.id,
+                title: movie.title,
+                year: movie.year,
+                poster: movie.poster,
+                type: "ott",
+                platform: movie.platform,
+              }}
+              showText={false}
+              size="sm"
+            />
+          </div>
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+            <h3 className="font-bold text-white text-lg">{movie.title}</h3>
+            <div className="flex items-center gap-2 text-white/80 text-sm mt-1">
+              <Calendar className="h-3 w-3" />
+              <span>{movie.year}</span>
+            </div>
+          </div>
+        </div>
+      </CardHeader>
+      <CardContent className="p-4">
+        <div className="flex flex-wrap gap-2">
+          <Badge variant="outline" className="capitalize">
+            {movie.type}
+          </Badge>
+          {movie.platform && (
+            <div className="flex items-center text-sm text-muted-foreground">
+              <Play className="h-3 w-3 mr-1" />
+              <span>Watch on {movie.platform}</span>
+            </div>
+          )}
+        </div>
+      </CardContent>
+      <CardFooter className="p-4 pt-0">
+        <Button variant="secondary" className="w-full" onClick={() => onMovieClick(movie)}>
+          <Info className="h-4 w-4 mr-2" />
+          Details
+        </Button>
+      </CardFooter>
+    </Card>
+  ),
+)
+
+MovieCard.displayName = "MovieCard"
+
 export default function MovieGrid() {
   const [movies, setMovies] = useState<(Movie & { platform?: string })[]>([])
   const [selectedMovie, setSelectedMovie] = useState<(MovieDetails & { platform?: string }) | null>(null)
@@ -63,17 +134,18 @@ export default function MovieGrid() {
   const [open, setOpen] = useState(false)
   const [loadingDetails, setLoadingDetails] = useState(false)
 
-  useEffect(() => {
-    fetchMovies(MOVIE_LIST.map((item) => item.title))
+  const movieTitles = useMemo(() => MOVIE_LIST.map((item) => item.title), [])
+
+  const getPlatformColor = useCallback((platform: string) => {
+    return PLATFORM_COLORS[platform] || "bg-gray-600 hover:bg-gray-700"
   }, [])
 
-  const fetchMovies = async (movieTitles: string[]) => {
+  const fetchMovies = useCallback(async (movieTitles: string[]) => {
     setLoading(true)
     setError(null)
     try {
       const result = await getSpecificMovies(movieTitles)
 
-      // Add platform information to each movie
       const moviesWithPlatform = result.map((movie) => {
         const movieInfo = MOVIE_LIST.find((item) => item.title.toLowerCase() === movie.title.toLowerCase())
         return {
@@ -95,9 +167,13 @@ export default function MovieGrid() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
 
-  const handleMovieClick = async (movie: Movie & { platform?: string }) => {
+  useEffect(() => {
+    fetchMovies(movieTitles)
+  }, [fetchMovies, movieTitles])
+
+  const handleMovieClick = useCallback(async (movie: Movie & { platform?: string }) => {
     setLoadingDetails(true)
     setOpen(true)
 
@@ -117,11 +193,7 @@ export default function MovieGrid() {
     } finally {
       setLoadingDetails(false)
     }
-  }
-
-  const getPlatformColor = (platform: string) => {
-    return PLATFORM_COLORS[platform] || "bg-gray-600 hover:bg-gray-700"
-  }
+  }, [])
 
   return (
     <>
@@ -129,7 +201,7 @@ export default function MovieGrid() {
 
       {loading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
-          {[...Array(6)].map((_, index) => (
+          {Array.from({ length: 8 }, (_, index) => (
             <Card key={index} className="overflow-hidden">
               <CardHeader className="p-0">
                 <Skeleton className="aspect-[3/4] w-full h-[300px]" />
@@ -153,48 +225,12 @@ export default function MovieGrid() {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
           {movies.map((movie) => (
-            <Card key={movie.id} className="overflow-hidden">
-              <CardHeader className="p-0">
-                <div className="aspect-[3/4] relative">
-                  <img
-                    src={movie.poster || "/placeholder.svg"}
-                    alt={movie.title}
-                    className="object-cover w-full h-full"
-                  />
-                  {movie.platform && (
-                    <div className="absolute top-2 right-2">
-                      <Badge className={`${getPlatformColor(movie.platform)} text-white`}>{movie.platform}</Badge>
-                    </div>
-                  )}
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                    <h3 className="font-bold text-white text-lg">{movie.title}</h3>
-                    <div className="flex items-center gap-2 text-white/80 text-sm mt-1">
-                      <Calendar className="h-3 w-3" />
-                      <span>{movie.year}</span>
-                    </div>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent className="p-4">
-                <div className="flex flex-wrap gap-2">
-                  <Badge variant="outline" className="capitalize">
-                    {movie.type}
-                  </Badge>
-                  {movie.platform && (
-                    <div className="flex items-center text-sm text-muted-foreground">
-                      <Play className="h-3 w-3 mr-1" />
-                      <span>Watch on {movie.platform}</span>
-                    </div>
-                  )}
-                </div>
-              </CardContent>
-              <CardFooter className="p-4 pt-0">
-                <Button variant="secondary" className="w-full" onClick={() => handleMovieClick(movie)}>
-                  <Info className="h-4 w-4 mr-2" />
-                  Details
-                </Button>
-              </CardFooter>
-            </Card>
+            <MovieCard
+              key={movie.id}
+              movie={movie}
+              onMovieClick={handleMovieClick}
+              getPlatformColor={getPlatformColor}
+            />
           ))}
         </div>
       )}
@@ -225,12 +261,14 @@ export default function MovieGrid() {
               </DialogHeader>
               <div className="grid gap-4">
                 <div className="flex items-start gap-4">
-                  <img
+                  <OptimizedImage
                     src={
                       selectedMovie.Poster !== "N/A" ? selectedMovie.Poster : "/placeholder.svg?height=400&width=300"
                     }
                     alt={selectedMovie.Title}
-                    className="w-24 h-32 object-cover rounded-md"
+                    width={96}
+                    height={128}
+                    className="w-24 h-32 rounded-md"
                   />
                   <div>
                     <p className="text-sm">{selectedMovie.Plot}</p>

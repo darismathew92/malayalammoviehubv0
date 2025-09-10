@@ -1,12 +1,23 @@
+import Head from "next/head"
 import Link from "next/link"
-import UpcomingMovieGrid from "@/components/upcoming-movie-grid"
+import TrailerGrid from "@/components/trailer-grid"
 import RandomMovieGenerator from "@/components/random-movie-generator"
 
-export default function UpcomingMovies() {
+export default function Trailers() {
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-10 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <Head>
+        <title>Malayalam Movie Trailers - Malayalam Movies Hub</title>
+        <meta name="description" content="Watch the latest Malayalam movie trailers and teasers on YouTube." />
         <meta name="google-adsense-account" content="ca-pub-3997090848958699" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta property="og:title" content="Malayalam Movie Trailers - Malayalam Movies Hub" />
+        <meta property="og:description" content="Watch the latest Malayalam movie trailers and teasers." />
+        <meta property="og:image" content="/og-image.png" />
+        <meta property="og:url" content="https://malayalammovieshub.com/trailers" />
+        <meta property="og:type" content="website" />
+      </Head>
+      <header className="sticky top-0 z-10 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-center py-4">
           <div className="flex items-center gap-2">
             <Link href="/" className="flex items-center gap-2">
@@ -19,7 +30,8 @@ export default function UpcomingMovies() {
       <main className="flex-1">
         <section className="container py-6 md:py-10">
           <div className="flex flex-col gap-4 text-center mb-8">
-            <h1 className="text-3xl font-bold tracking-tight">Upcoming Malayalam Movies in Theaters</h1>
+            <h1 className="text-3xl font-bold tracking-tight">Malayalam Movie Trailers</h1>
+            <p className="text-muted-foreground">Watch the latest trailers and teasers</p>
           </div>
           <div className="flex justify-center gap-4 mb-8">
             <Link
@@ -30,7 +42,7 @@ export default function UpcomingMovies() {
             </Link>
             <Link
               href="/upcoming"
-              className="px-4 py-2 rounded-md bg-primary text-primary-foreground hover:bg-primary/90"
+              className="px-4 py-2 rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/80"
             >
               Theater Releases
             </Link>
@@ -42,7 +54,7 @@ export default function UpcomingMovies() {
             </Link>
             <Link
               href="/trailers"
-              className="px-4 py-2 rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/80"
+              className="px-4 py-2 rounded-md bg-primary text-primary-foreground hover:bg-primary/90"
             >
               Trailers
             </Link>
@@ -53,7 +65,7 @@ export default function UpcomingMovies() {
               My Watchlist
             </Link>
           </div>
-          <UpcomingMovieGrid />
+          <TrailerGrid />
         </section>
       </main>
       <footer className="border-t py-6 md:py-0">

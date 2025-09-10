@@ -41,6 +41,18 @@ export default function YouTubeMovies() {
             >
               YouTube Movies
             </Link>
+            <Link
+              href="/trailers"
+              className="px-4 py-2 rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/80"
+            >
+              Trailers
+            </Link>
+            <Link
+              href="/watchlist"
+              className="px-4 py-2 rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/80"
+            >
+              My Watchlist
+            </Link>
           </div>
           <YouTubeMovieGrid />
         </section>
