@@ -63,7 +63,7 @@ const MovieCard = React.memo(
     onMovieClick: (movie: Movie & { platform?: string }) => void
     getPlatformColor: (platform: string) => string
   }) => (
-    <Card className="overflow-hidden">
+    <Card className="overflow-hidden hover:shadow-lg transition-shadow">
       <CardHeader className="p-0">
         <div className="aspect-[3/4] relative">
           <OptimizedImage
@@ -71,11 +71,11 @@ const MovieCard = React.memo(
             alt={movie.title}
             width={300}
             height={400}
-            className="w-full h-full"
+            className="w-full h-full object-cover"
           />
           {movie.platform && (
             <div className="absolute top-2 right-2">
-              <Badge className={`${getPlatformColor(movie.platform)} text-white`}>{movie.platform}</Badge>
+              <Badge className={`${getPlatformColor(movie.platform)} text-white text-xs`}>{movie.platform}</Badge>
             </div>
           )}
           <div className="absolute top-2 left-2">
@@ -92,31 +92,35 @@ const MovieCard = React.memo(
               size="sm"
             />
           </div>
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-            <h3 className="font-bold text-white text-lg">{movie.title}</h3>
-            <div className="flex items-center gap-2 text-white/80 text-sm mt-1">
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3 md:p-4">
+            <h3 className="font-bold text-white text-sm md:text-lg line-clamp-2">{movie.title}</h3>
+            <div className="flex items-center gap-2 text-white/80 text-xs md:text-sm mt-1">
               <Calendar className="h-3 w-3" />
               <span>{movie.year}</span>
             </div>
           </div>
         </div>
       </CardHeader>
-      <CardContent className="p-4">
-        <div className="flex flex-wrap gap-2">
-          <Badge variant="outline" className="capitalize">
+      <CardContent className="p-3 md:p-4">
+        <div className="flex flex-wrap gap-1 md:gap-2">
+          <Badge variant="outline" className="capitalize text-xs">
             {movie.type}
           </Badge>
           {movie.platform && (
-            <div className="flex items-center text-sm text-muted-foreground">
+            <div className="flex items-center text-xs md:text-sm text-muted-foreground">
               <Play className="h-3 w-3 mr-1" />
-              <span>Watch on {movie.platform}</span>
+              <span className="truncate">Watch on {movie.platform}</span>
             </div>
           )}
         </div>
       </CardContent>
-      <CardFooter className="p-4 pt-0">
-        <Button variant="secondary" className="w-full" onClick={() => onMovieClick(movie)}>
-          <Info className="h-4 w-4 mr-2" />
+      <CardFooter className="p-3 md:p-4 pt-0">
+        <Button
+          variant="secondary"
+          className="w-full text-xs md:text-sm h-8 md:h-10"
+          onClick={() => onMovieClick(movie)}
+        >
+          <Info className="h-3 w-3 md:h-4 md:w-4 mr-1 md:mr-2" />
           Details
         </Button>
       </CardFooter>
@@ -197,7 +201,11 @@ export default function MovieGrid() {
 
   return (
     <>
-      {error && <div className="bg-destructive/15 text-destructive p-4 rounded-md mb-6">{error}</div>}
+      {error && (
+        <div className="bg-destructive/15 text-destructive p-3 md:p-4 rounded-md mb-4 md:mb-6 mx-4 md:mx-0 text-sm md:text-base">
+          {error}
+        </div>
+      )}
 
       {loading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
@@ -236,7 +244,7 @@ export default function MovieGrid() {
       )}
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="sm:max-w-[600px]">
+        <DialogContent className="sm:max-w-[600px] mx-4 max-h-[90vh] overflow-y-auto">
           {loadingDetails ? (
             <div className="space-y-4 py-4">
               <div className="flex gap-4">
