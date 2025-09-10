@@ -49,13 +49,6 @@ export default function Home() {
               YouTube Movies
             </Link>
           </div>
-
-          <div className="w-full flex justify-center mb-8">
-            <div className="w-full max-w-[468px] md:max-w-[728px] min-h-[60px] md:min-h-[90px] bg-gray-50 border border-gray-200 rounded-lg flex items-center justify-center">
-              <span className="text-sm text-gray-400">Advertisement</span>
-            </div>
-          </div>
-
           <MovieGrid />
         </section>
       </main>
