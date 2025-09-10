@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import RandomMovieGenerator from "./random-movie-generator"
 
 const navItems = [
   { href: "/", label: "OTT Releases", icon: "🎬" },
@@ -57,6 +58,16 @@ export function MobileNav() {
                     <span className="truncate">{item.label}</span>
                   </Link>
                 ))}
+              </div>
+
+              <div className="mt-4 pt-4 border-t border-gray-200">
+                <div className="flex items-center justify-center">
+                  <div className="flex items-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-yellow-50 to-orange-50 border border-yellow-200">
+                    <span className="text-lg">✨</span>
+                    <span className="text-sm font-medium text-gray-700">Random Movie:</span>
+                    <RandomMovieGenerator />
+                  </div>
+                </div>
               </div>
             </nav>
           </div>

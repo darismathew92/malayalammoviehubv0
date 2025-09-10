@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Play, Calendar, Clock } from "lucide-react"
 import { WatchlistButton } from "@/components/watchlist-button"
+import React from "react"
 
 interface Trailer {
   id: string
@@ -147,6 +148,28 @@ export default function TrailerGrid() {
     })
   }
 
+  const handleFullscreenChange = React.useCallback(() => {
+    if (
+      document.fullscreenElement &&
+      /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    ) {
+      // Force landscape orientation on mobile when entering fullscreen
+      if (screen.orientation && screen.orientation.lock) {
+        screen.orientation.lock("landscape").catch(() => {
+          // Fallback if orientation lock fails
+          console.log("[v0] Orientation lock not supported or failed")
+        })
+      }
+    }
+  }, [])
+
+  React.useEffect(() => {
+    document.addEventListener("fullscreenchange", handleFullscreenChange)
+    return () => {
+      document.removeEventListener("fullscreenchange", handleFullscreenChange)
+    }
+  }, [handleFullscreenChange])
+
   return (
     <div className="space-y-6">
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
@@ -194,7 +217,8 @@ export default function TrailerGrid() {
                   title={selectedTrailer.title}
                   className="w-full h-full rounded-lg"
                   allowFullScreen
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                  data-video-player="true"
                 />
               </div>
               <div className="space-y-2">

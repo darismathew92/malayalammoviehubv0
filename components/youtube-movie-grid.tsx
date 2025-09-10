@@ -136,7 +136,7 @@ const MovieCard = React.memo(
           </Button>
         </div>
         <div className="p-4">
-          <div className="flex items-start justify-between gap-2 mb-2">
+          <div className="flex items-start justify-between gap-4 mb-2">
             <h3 className="font-semibold text-lg line-clamp-1 flex-1">{movie.title}</h3>
             <WatchlistButton
               item={{
@@ -183,6 +183,28 @@ export default function YouTubeMovieGrid() {
   const [activeTab, setActiveTab] = useState("movies")
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedGenre, setSelectedGenre] = useState("all")
+
+  const handleFullscreenChange = useCallback(() => {
+    if (
+      document.fullscreenElement &&
+      /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    ) {
+      // Force landscape orientation on mobile when entering fullscreen
+      if (screen.orientation && screen.orientation.lock) {
+        screen.orientation.lock("landscape").catch(() => {
+          // Fallback if orientation lock fails
+          console.log("[v0] Orientation lock not supported or failed")
+        })
+      }
+    }
+  }, [])
+
+  React.useEffect(() => {
+    document.addEventListener("fullscreenchange", handleFullscreenChange)
+    return () => {
+      document.removeEventListener("fullscreenchange", handleFullscreenChange)
+    }
+  }, [handleFullscreenChange])
 
   const filteredMovies = useMemo(() => {
     return youtubeMovies.filter((movie) => {
@@ -310,12 +332,13 @@ export default function YouTubeMovieGrid() {
                 <iframe
                   width="100%"
                   height="100%"
-                  src={`https://www.youtube.com/embed/${selectedMovie.youtubeId}`}
+                  src={`https://www.youtube.com/embed/${selectedMovie.youtubeId}?autoplay=1`}
                   title={selectedMovie.title}
                   frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                   allowFullScreen
                   className="rounded-lg"
+                  data-video-player="true"
                 />
               </div>
               <div className="space-y-2">
