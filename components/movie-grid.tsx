@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
 import { OptimizedImage } from "@/components/optimized-image"
 import { WatchlistButton } from "@/components/watchlist-button"
+import { useMovieCache } from "@/contexts/movie-cache-context"
 
 import { getMovieDetails, getSpecificMovies, type Movie, type MovieDetails } from "@/lib/api"
 
@@ -140,66 +141,100 @@ export default function MovieGrid() {
   const [open, setOpen] = useState(false)
   const [loadingDetails, setLoadingDetails] = useState(false)
 
+  const { getCachedMovies, setCachedMovies, getCachedMovieDetails, setCachedMovieDetails } = useMovieCache()
+
   const movieTitles = useMemo(() => MOVIE_LIST.map((item) => item.title), [])
 
   const getPlatformColor = useCallback((platform: string) => {
     return PLATFORM_COLORS[platform] || "bg-gray-600 hover:bg-gray-700"
   }, [])
 
-  const fetchMovies = useCallback(async (movieTitles: string[]) => {
-    setLoading(true)
-    setError(null)
-    try {
-      const result = await getSpecificMovies(movieTitles)
-
-      const moviesWithPlatform = result.map((movie) => {
-        const movieInfo = MOVIE_LIST.find((item) => item.title.toLowerCase() === movie.title.toLowerCase())
-        return {
-          ...movie,
-          platform: movieInfo?.platform,
-        }
-      })
-
-      setMovies(moviesWithPlatform)
-
-      if (result.length === 0) {
-        setError("No movies found. Please check the movie titles in the code.")
-      } else if (result.length < movieTitles.length) {
-        setError(`Found ${result.length} out of ${movieTitles.length} movies. Some titles may be incorrect.`)
+  const fetchMovies = useCallback(
+    async (movieTitles: string[]) => {
+      const cachedMovies = getCachedMovies()
+      if (cachedMovies && cachedMovies.length > 0) {
+        const moviesWithPlatform = cachedMovies.map((movie) => {
+          const movieInfo = MOVIE_LIST.find((item) => item.title.toLowerCase() === movie.title.toLowerCase())
+          return {
+            ...movie,
+            platform: movieInfo?.platform,
+          }
+        })
+        setMovies(moviesWithPlatform)
+        setLoading(false)
+        return
       }
-    } catch (err) {
-      setError("Failed to fetch movies. Please try again later.")
-      console.error(err)
-    } finally {
-      setLoading(false)
-    }
-  }, [])
+
+      setLoading(true)
+      setError(null)
+      try {
+        const result = await getSpecificMovies(movieTitles)
+
+        const moviesWithPlatform = result.map((movie) => {
+          const movieInfo = MOVIE_LIST.find((item) => item.title.toLowerCase() === movie.title.toLowerCase())
+          return {
+            ...movie,
+            platform: movieInfo?.platform,
+          }
+        })
+
+        setMovies(moviesWithPlatform)
+        setCachedMovies(result)
+
+        if (result.length === 0) {
+          setError("No movies found. Please check the movie titles in the code.")
+        } else if (result.length < movieTitles.length) {
+          setError(`Found ${result.length} out of ${movieTitles.length} movies. Some titles may be incorrect.`)
+        }
+      } catch (err) {
+        setError("Failed to fetch movies. Please try again later.")
+        console.error(err)
+      } finally {
+        setLoading(false)
+      }
+    },
+    [getCachedMovies, setCachedMovies],
+  )
 
   useEffect(() => {
     fetchMovies(movieTitles)
   }, [fetchMovies, movieTitles])
 
-  const handleMovieClick = useCallback(async (movie: Movie & { platform?: string }) => {
-    setLoadingDetails(true)
-    setOpen(true)
-
-    try {
-      const details = await getMovieDetails(movie.imdbID)
-      if (details) {
+  const handleMovieClick = useCallback(
+    async (movie: Movie & { platform?: string }) => {
+      const cachedDetails = getCachedMovieDetails(movie.imdbID)
+      if (cachedDetails) {
         setSelectedMovie({
-          ...details,
+          ...cachedDetails,
           platform: movie.platform,
         })
-      } else {
-        setError("Failed to load movie details")
+        setOpen(true)
+        return
       }
-    } catch (err) {
-      console.error(err)
-      setError("An error occurred while fetching movie details")
-    } finally {
-      setLoadingDetails(false)
-    }
-  }, [])
+
+      setLoadingDetails(true)
+      setOpen(true)
+
+      try {
+        const details = await getMovieDetails(movie.imdbID)
+        if (details) {
+          setCachedMovieDetails(movie.imdbID, details)
+          setSelectedMovie({
+            ...details,
+            platform: movie.platform,
+          })
+        } else {
+          setError("Failed to load movie details")
+        }
+      } catch (err) {
+        console.error(err)
+        setError("An error occurred while fetching movie details")
+      } finally {
+        setLoadingDetails(false)
+      }
+    },
+    [getCachedMovieDetails, setCachedMovieDetails],
+  )
 
   return (
     <>

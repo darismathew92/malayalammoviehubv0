@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import Script from "next/script"
 import { Suspense } from "react"
+import { MovieCacheProvider } from "../contexts/movie-cache-context"
 import "./globals.css"
 
 export const metadata: Metadata = {
@@ -163,7 +164,9 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="//www.revenuecpmgate.com" />
       </head>
       <body>
-        <Suspense fallback={null}>{children}</Suspense>
+        <MovieCacheProvider>
+          <Suspense fallback={null}>{children}</Suspense>
+        </MovieCacheProvider>
 
         <div id="container-4a1d554af74a536a78f81ec11493b477"></div>
         <Script
