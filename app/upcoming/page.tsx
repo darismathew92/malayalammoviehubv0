@@ -6,7 +6,7 @@ export default function UpcomingMovies() {
   return (
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-10 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <meta name="google-adsense-account" content="ca-pub-3997090848958699"/>
+        <meta name="google-adsense-account" content="ca-pub-3997090848958699" />
         <div className="container flex h-16 items-center justify-center py-4">
           <div className="flex items-center gap-2">
             <Link href="/" className="flex items-center gap-2">
@@ -33,6 +33,12 @@ export default function UpcomingMovies() {
               className="px-4 py-2 rounded-md bg-primary text-primary-foreground hover:bg-primary/90"
             >
               Theater Releases
+            </Link>
+            <Link
+              href="/youtube"
+              className="px-4 py-2 rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/80"
+            >
+              YouTube Movies
             </Link>
           </div>
           <UpcomingMovieGrid />
