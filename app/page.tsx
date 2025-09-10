@@ -31,7 +31,7 @@ export default function Home() {
             <Link href="/" className="flex items-center gap-2">
               <span className="text-lg md:text-xl font-bold">Malayalam Movies Hub</span>
             </Link>
-            <div className="hidden sm:block">
+            <div>
               <RandomMovieGenerator />
             </div>
           </div>
@@ -84,6 +84,12 @@ export default function Home() {
               className="px-3 py-2 md:px-4 rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/80 whitespace-nowrap text-sm md:text-base"
             >
               My Watchlist
+            </Link>
+            <Link
+              href="/news"
+              className="px-3 py-2 md:px-4 rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/80 whitespace-nowrap text-sm md:text-base"
+            >
+              News
             </Link>
           </nav>
 

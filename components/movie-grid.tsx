@@ -4,7 +4,6 @@ import React from "react"
 
 import { useState, useEffect, useMemo, useCallback } from "react"
 import { Calendar, Info, Star, Film, Play } from "lucide-react"
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
@@ -260,9 +259,7 @@ export default function MovieGrid() {
           ) : selectedMovie ? (
             <>
               <DialogHeader>
-                <VisuallyHidden>
-                  <DialogTitle>{selectedMovie.Title}</DialogTitle>
-                </VisuallyHidden>
+                <DialogTitle>{selectedMovie.Title}</DialogTitle>
                 <DialogDescription>
                   {selectedMovie.Year} • {selectedMovie.Runtime}
                 </DialogDescription>
