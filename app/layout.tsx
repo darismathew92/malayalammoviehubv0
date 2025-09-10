@@ -1,6 +1,8 @@
 import type React from "react"
 import type { Metadata } from "next"
 import Script from "next/script"
+import { Analytics } from "@vercel/analytics/react"
+import { Suspense } from "react"
 import "./globals.css"
 
 export const metadata: Metadata = {
@@ -17,7 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
+        <Suspense fallback={null}>{children}</Suspense>
+
+        <Analytics />
 
         {/* --- Second ad block --- */}
         <div id="container-4a1d554af74a536a78f81ec11493b477"></div>
