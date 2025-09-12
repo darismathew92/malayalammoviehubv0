@@ -24,7 +24,7 @@ export default function DesktopNav() {
           className={`px-4 py-2 rounded-md whitespace-nowrap text-base transition-colors ${
             pathname === item.href
               ? "bg-primary text-primary-foreground hover:bg-primary/90"
-              : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+              : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-100"
           }`}
         >
           {item.label}
