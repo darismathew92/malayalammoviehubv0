@@ -1,5 +1,4 @@
 "use client"
-
 import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -26,11 +25,11 @@ export function MobileNav() {
         aria-label="Toggle navigation menu"
       >
         <span
-          className={`w-5 h-0.5 bg-gray-700 transition-all duration-300 ${isOpen ? "rotate-45 translate-y-1.5" : ""}`}
+          className={`w-5 h-0.5 bg-gray-900 transition-all duration-300 ${isOpen ? "rotate-45 translate-y-1.5" : ""}`}
         />
-        <span className={`w-5 h-0.5 bg-gray-700 transition-all duration-300 my-1 ${isOpen ? "opacity-0" : ""}`} />
+        <span className={`w-5 h-0.5 bg-gray-900 transition-all duration-300 my-1 ${isOpen ? "opacity-0" : ""}`} />
         <span
-          className={`w-5 h-0.5 bg-gray-700 transition-all duration-300 ${isOpen ? "-rotate-45 -translate-y-1.5" : ""}`}
+          className={`w-5 h-0.5 bg-gray-900 transition-all duration-300 ${isOpen ? "-rotate-45 -translate-y-1.5" : ""}`}
         />
       </button>
 
@@ -40,7 +39,7 @@ export function MobileNav() {
           <div className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40" onClick={() => setIsOpen(false)} />
 
           {/* Menu */}
-          <div className="absolute top-full left-0 right-0 bg-white/98 backdrop-blur-md border-b border-gray-200 shadow-xl z-50 animate-in slide-in-from-top-2 duration-200">
+          <div className="absolute top-full left-0 right-0 bg-white border-b border-gray-200 shadow-xl z-50 animate-in slide-in-from-top-2 duration-200">
             <nav className="max-w-7xl mx-auto px-4 py-6">
               <div className="grid grid-cols-2 gap-3">
                 {navItems.map((item) => (
@@ -51,7 +50,7 @@ export function MobileNav() {
                     className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
                       pathname === item.href
                         ? "bg-blue-600 text-white shadow-lg shadow-blue-600/25"
-                        : "text-gray-700 hover:bg-gray-100 active:bg-gray-200"
+                        : "text-gray-900 hover:bg-gray-100 active:bg-gray-200"
                     }`}
                   >
                     <span className="text-lg">{item.icon}</span>
@@ -64,7 +63,7 @@ export function MobileNav() {
                 <div className="flex items-center justify-center">
                   <div className="flex items-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-yellow-50 to-orange-50 border border-yellow-200">
                     <span className="text-lg">✨</span>
-                    <span className="text-sm font-medium text-gray-700">Random Movie:</span>
+                    <span className="text-sm font-medium text-gray-900">Random Movie:</span>
                     <RandomMovieGenerator />
                   </div>
                 </div>

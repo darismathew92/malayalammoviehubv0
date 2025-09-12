@@ -1,7 +1,8 @@
 "use client"
 
+import React from "react"
 import Link from "next/link"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useCallback } from "react"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -39,6 +40,28 @@ export default function WatchlistPage() {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedGenre, setSelectedGenre] = useState("all")
   const [selectedMovie, setSelectedMovie] = useState<WatchlistItem | null>(null)
+
+  const handleFullscreenChange = useCallback(() => {
+    if (
+      document.fullscreenElement &&
+      /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    ) {
+      // Force landscape orientation on mobile when entering fullscreen
+      if (screen.orientation && screen.orientation.lock) {
+        screen.orientation.lock("landscape").catch(() => {
+          // Fallback if orientation lock fails
+          console.log("[v0] Orientation lock not supported or failed")
+        })
+      }
+    }
+  }, [])
+
+  React.useEffect(() => {
+    document.addEventListener("fullscreenchange", handleFullscreenChange)
+    return () => {
+      document.removeEventListener("fullscreenchange", handleFullscreenChange)
+    }
+  }, [handleFullscreenChange])
 
   const filteredWatchlist = useMemo(() => {
     let filtered = activeTab === "all" ? watchlist : getWatchlistByType(activeTab as WatchlistItem["type"])
@@ -345,12 +368,13 @@ export default function WatchlistPage() {
                 <iframe
                   width="100%"
                   height="100%"
-                  src={`https://www.youtube.com/embed/${selectedMovie.youtubeId}`}
+                  src={`https://www.youtube.com/embed/${selectedMovie.youtubeId}?autoplay=1`}
                   title={selectedMovie.title}
                   frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                   allowFullScreen
                   className="rounded-lg"
+                  data-video-player="true"
                 />
               </div>
               <div className="space-y-2">

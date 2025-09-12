@@ -115,6 +115,47 @@ export default function Home() {
             <DesktopNav />
           </nav>
 
+          <section className="mb-12 md:hidden" aria-label="Discover Features">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4 text-center">Explore More Content</h2>
+            <div className="grid grid-cols-2 gap-3">
+              <Link
+                href="/youtube"
+                className="flex flex-col items-center gap-2 p-4 bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-200 active:scale-95"
+              >
+                <span className="text-2xl">📺</span>
+                <span className="text-sm font-medium text-gray-900">YouTube Movies</span>
+                <span className="text-xs text-gray-500 text-center">Full movies on YouTube</span>
+              </Link>
+
+              <Link
+                href="/trailers"
+                className="flex flex-col items-center gap-2 p-4 bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-200 active:scale-95"
+              >
+                <span className="text-2xl">🎥</span>
+                <span className="text-sm font-medium text-gray-900">Trailers</span>
+                <span className="text-xs text-gray-500 text-center">Latest & classic trailers</span>
+              </Link>
+
+              <Link
+                href="/news"
+                className="flex flex-col items-center gap-2 p-4 bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-200 active:scale-95"
+              >
+                <span className="text-2xl">📰</span>
+                <span className="text-sm font-medium text-gray-900">News</span>
+                <span className="text-xs text-gray-500 text-center">Industry updates</span>
+              </Link>
+
+              <Link
+                href="/upcoming"
+                className="flex flex-col items-center gap-2 p-4 bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-200 active:scale-95"
+              >
+                <span className="text-2xl">🎭</span>
+                <span className="text-sm font-medium text-gray-900">Theater Releases</span>
+                <span className="text-xs text-gray-500 text-center">Coming to cinemas</span>
+              </Link>
+            </div>
+          </section>
+
           <div id="movies" itemProp="mainEntity">
             <MovieGrid />
           </div>

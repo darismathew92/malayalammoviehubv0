@@ -1,5 +1,4 @@
 "use client"
-
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
@@ -23,8 +22,8 @@ export default function DesktopNav() {
           href={item.href}
           className={`px-4 py-2 rounded-md whitespace-nowrap text-base transition-colors ${
             pathname === item.href
-              ? "bg-primary text-primary-foreground hover:bg-primary/90"
-              : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-100"
+              ? "bg-blue-600 text-white hover:bg-blue-700"
+              : "bg-gray-100 text-gray-900 hover:bg-gray-200 hover:text-gray-900 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700 dark:hover:text-gray-100"
           }`}
         >
           {item.label}
