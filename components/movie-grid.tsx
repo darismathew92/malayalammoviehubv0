@@ -17,6 +17,7 @@ import { getMovieDetails, getSpecificMovies, type Movie, type MovieDetails } fro
 
 // Movie list with platform information
 const MOVIE_LIST = [
+  { title: "Meesha", platform: "Sun NXT,OTT Play Premium" },
   { title: "Flask", platform: "Manorama Max" },
   { title: "Raveendra Nee Evide?", platform: "Saina Play, Prime Video" },
   { title: "Kammattam", platform: "ZEE5" },
