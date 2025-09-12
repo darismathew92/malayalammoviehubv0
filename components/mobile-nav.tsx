@@ -39,7 +39,7 @@ export function MobileNav() {
     <div className="md:hidden">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-gray-100 active:bg-gray-200 transition-colors touch-manipulation"
+        className="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-gray-100 active:bg-gray-200 transition-colors touch-manipulation relative z-50"
         aria-label="Toggle navigation menu"
         aria-expanded={isOpen}
       >
@@ -48,28 +48,25 @@ export function MobileNav() {
 
       {isOpen && (
         <>
-          {/* Backdrop */}
           <div
-            className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 animate-in fade-in duration-200"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[60] animate-in fade-in duration-200"
             onClick={() => setIsOpen(false)}
             aria-hidden="true"
           />
 
-          {/* Menu */}
-          <div className="fixed inset-x-0 top-16 bottom-0 bg-white z-50 animate-in slide-in-from-top-4 duration-300 ease-out overflow-y-auto">
-            <div className="px-4 py-6 h-full flex flex-col">
-              {/* Header */}
-              <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-100">
-                <h2 className="text-lg font-semibold text-gray-900">Navigation</h2>
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className="p-2 rounded-lg hover:bg-gray-100 active:bg-gray-200 transition-colors touch-manipulation"
-                  aria-label="Close menu"
-                >
-                  <X className="w-5 h-5 text-gray-500" />
-                </button>
-              </div>
+          <div className="fixed inset-x-0 top-0 bottom-0 bg-white z-[70] animate-in slide-in-from-top-4 duration-300 ease-out overflow-y-auto">
+            <div className="h-16 bg-white/95 backdrop-blur-sm border-b border-gray-200 flex items-center justify-between px-4">
+              <h2 className="text-lg font-semibold text-gray-900">Navigation</h2>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="p-2 rounded-lg hover:bg-gray-100 active:bg-gray-200 transition-colors touch-manipulation"
+                aria-label="Close menu"
+              >
+                <X className="w-5 h-5 text-gray-500" />
+              </button>
+            </div>
 
+            <div className="px-4 py-6 h-full flex flex-col">
               {/* Navigation Items */}
               <nav className="flex-1">
                 <div className="space-y-2">

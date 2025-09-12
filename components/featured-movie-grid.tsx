@@ -148,50 +148,55 @@ export default function FeaturedMovieGrid() {
                 )}
 
                 <div
-                  className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  style={{
-                    background:
-                      "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 40%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,0.3) 100%)",
-                    backdropFilter: "blur(2px)",
-                  }}
-                />
-
-                <div
-                  className="absolute bottom-0 left-0 right-0 p-4 movie-card-overlay"
+                  className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"
                   style={{
                     background:
                       "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 40%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,0.3) 100%) !important",
                   }}
+                />
+
+                <div
+                  className="absolute bottom-0 left-0 right-0 p-4"
+                  style={{
+                    backgroundColor: "rgba(0,0,0,0.9) !important",
+                  }}
                 >
                   <h3
-                    className="font-bold text-lg line-clamp-2 mb-1 movie-card-text force-white-text"
+                    className="font-bold text-lg line-clamp-2 mb-1"
                     style={{
                       color: "#ffffff !important",
                       textShadow: "2px 2px 4px rgba(0,0,0,1) !important",
+                      backgroundColor: "rgba(0,0,0,0.8) !important",
+                      padding: "2px 4px !important",
+                      borderRadius: "4px !important",
                     }}
                   >
                     {movie.title}
                   </h3>
                   <div className="flex items-center gap-3 text-sm">
                     <div className="flex items-center gap-1">
-                      <Calendar className="h-3 w-3" style={{ color: "#ffffff !important" }} />
+                      <Calendar className="h-3 w-3 text-white" />
                       <span
-                        className="movie-card-text force-white-text"
                         style={{
                           color: "#ffffff !important",
                           textShadow: "1px 1px 2px rgba(0,0,0,1) !important",
+                          backgroundColor: "rgba(0,0,0,0.8) !important",
+                          padding: "1px 3px !important",
+                          borderRadius: "3px !important",
                         }}
                       >
                         {movie.year}
                       </span>
                     </div>
                     <div className="flex items-center gap-1">
-                      <Star className="h-3 w-3 fill-yellow-400" style={{ color: "#fbbf24 !important" }} />
+                      <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
                       <span
-                        className="movie-card-text force-white-text"
                         style={{
                           color: "#ffffff !important",
                           textShadow: "1px 1px 2px rgba(0,0,0,1) !important",
+                          backgroundColor: "rgba(0,0,0,0.8) !important",
+                          padding: "1px 3px !important",
+                          borderRadius: "3px !important",
                         }}
                       >
                         {movie.rating}
