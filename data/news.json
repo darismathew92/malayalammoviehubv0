@@ -1,0 +1,76 @@
+[
+  {
+    "id": 1,
+    "title": "Mammootty's 'Turbo' Crosses ₹25 Crores",
+    "excerpt": "Action thriller breaks box office records in opening weekend.",
+    "content": "Mammootty's latest action thriller 'Turbo' has achieved a remarkable milestone by crossing ₹25 crores at the box office within its opening weekend. The film, directed by Vysakh, has been praised for its high-octane action sequences and Mammootty's powerful performance.\n\nThe movie opened to packed theaters across Kerala and other South Indian states, with many shows running housefull. Trade analysts predict that 'Turbo' could become one of the highest-grossing Malayalam films of 2024.\n\nThe film's success can be attributed to its engaging storyline, stellar performances, and top-notch technical values. Mammootty's portrayal of the lead character has been particularly appreciated by both critics and audiences.\n\n'Turbo' is expected to continue its strong performance in the coming weeks, with plans for wider release in international markets already underway.",
+    "author": "Cinema Reporter",
+    "date": "2024-12-15",
+    "category": "Box Office",
+    "image": "/mammootty-turbo-movie-poster.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Fahadh Faasil-Lijo Jose Pellissery Reunite",
+    "excerpt": "Acclaimed duo announces new project after 'Nanpakal Nerathu Mayakkam'.",
+    "content": "The acclaimed actor-director duo of Fahadh Faasil and Lijo Jose Pellissery are set to reunite for a new project, following their critically acclaimed collaboration in 'Nanpakal Nerathu Mayakkam'.\n\nThe announcement was made during a recent film festival, where both artists expressed their excitement about working together again. While details about the new project remain under wraps, sources suggest it will be another experimental venture that pushes the boundaries of conventional storytelling.\n\nTheir previous collaboration, 'Nanpakal Nerathu Mayakkam', was widely praised for its innovative narrative structure and Fahadh's nuanced performance. The film won several awards at various film festivals and established the duo as one of the most creative partnerships in contemporary Malayalam cinema.\n\nIndustry insiders are eagerly awaiting more details about this upcoming project, which is expected to begin production in early 2025.",
+    "author": "Film Insider",
+    "date": "2024-12-14",
+    "category": "Announcements",
+    "image": "/fahadh-faasil-lijo-jose-pellissery.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Kerala State Film Awards 2024 Winners",
+    "excerpt": "'Nanpakal Nerathu Mayakkam' wins Best Film, Director, and Actor.",
+    "author": "Awards Desk",
+    "date": "2024-12-13",
+    "category": "Awards",
+    "image": "/kerala-state-film-awards-2024.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Mohanlal's 'Barroz' Goes International",
+    "excerpt": "3D fantasy film secures distribution in 15+ countries.",
+    "author": "International News",
+    "date": "2024-12-12",
+    "category": "International",
+    "image": "/mohanlal-barroz-3d-movie.jpg"
+  },
+  {
+    "id": 5,
+    "title": "Prithviraj Productions Announces 3 Films",
+    "excerpt": "New slate includes thriller and family drama for 2025.",
+    "author": "Production News",
+    "date": "2024-12-11",
+    "category": "Production",
+    "image": "/prithviraj-sukumaran-producer.jpg"
+  },
+  {
+    "id": 6,
+    "title": "Tovino Thomas Wraps Sci-Fi Thriller",
+    "excerpt": "Technically advanced Malayalam film with cutting-edge VFX completed.",
+    "author": "Set Reporter",
+    "date": "2024-12-10",
+    "category": "Production",
+    "image": "/tovino-thomas-sci-fi-movie.jpg"
+  },
+  {
+    "id": 7,
+    "title": "Dulquer Salmaan's Next Gets Release Date",
+    "excerpt": "Romantic drama 'Kaathal' set for February 2025 release.",
+    "author": "Release News",
+    "date": "2024-12-09",
+    "category": "Releases",
+    "image": "/dulquer-salmaan-movie.jpg"
+  },
+  {
+    "id": 8,
+    "title": "Nivin Pauly Joins Vineeth Sreenivasan Film",
+    "excerpt": "Popular actor-director duo collaborate after 5 years.",
+    "author": "Casting News",
+    "date": "2024-12-08",
+    "category": "Casting",
+    "image": "/nivin-pauly-vineeth-sreenivasan.jpg"
+  }
+]

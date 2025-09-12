@@ -8,6 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Play, Calendar, Clock } from "lucide-react"
 import { WatchlistButton } from "@/components/watchlist-button"
 import React from "react"
+import trailersData from "@/data/trailers.json"
 
 interface Trailer {
   id: string
@@ -17,122 +18,11 @@ interface Trailer {
   description: string
   releaseDate: string
   duration: string
-  category: "latest" | "upcoming" | "classic"
+  category: "latest" | "classic"
   views: string
 }
 
-const trailers: Trailer[] = [
-  {
-    id: "1",
-    title: "Manjummel Boys",
-    youtubeId: "YjL5WT4wHm8",
-    thumbnail: "https://img.youtube.com/vi/YjL5WT4wHm8/maxresdefault.jpg",
-    description: "Official trailer of the survival thriller Manjummel Boys",
-    releaseDate: "2024-02-29",
-    duration: "2:31",
-    category: "latest",
-    views: "12M",
-  },
-  {
-  id: "8",
-  title: "Kalamkaval Official Teaser | Mammootty | Vinayakan | Jithin K Jose | MammoottyKampany",
-  youtubeId: "06vu-i4icw8",
-  thumbnail: "https://img.youtube.com/vi/06vu-i4icw8/maxresdefault.jpg",
-  description: "This is the official teaser for the film \"Kalamkaval,\" presented by Mammootty Kampany and directed by Jithin K Jose. The teaser features actors Mammootty and Vinayakan.",
-  releaseDate: "2025-08-28",
-  duration: "0:51",
-  category: "latest",
-  views: "1.5M",
-},
-  {
-    id: "4",
-    title: "Aadujeevitham",
-    youtubeId: "TKJ4kcKfL2I",
-    thumbnail: "https://img.youtube.com/vi/TKJ4kcKfL2I/maxresdefault.jpg",
-    description: "Official trailer of Aadujeevitham - The Goat Life",
-    releaseDate: "2024-03-28",
-    duration: "2:52",
-    category: "latest",
-    views: "15M",
-  },
-  {
-    id: "5",
-    title: "Bramayugam",
-    youtubeId: "qONn2UjCGQs",
-    thumbnail: "https://img.youtube.com/vi/qONn2UjCGQs/maxresdefault.jpg",
-    description: "Official trailer of the horror film Bramayugam",
-    releaseDate: "2024-02-15",
-    duration: "2:18",
-    category: "latest",
-    views: "6.2M",
-  },
-  {
-    id: "6",
-    title: "Aavesham",
-    youtubeId: "KhVvqR5_5jE",
-    thumbnail: "https://img.youtube.com/vi/KhVvqR5_5jE/maxresdefault.jpg",
-    description: "Official trailer of the action comedy Aavesham",
-    releaseDate: "2024-04-11",
-    duration: "2:33",
-    category: "latest",
-    views: "9.8M",
-  },
-  {
-    id: "7",
-    title: "Varshangalkku Shesham",
-    youtubeId: "Hs6KKj7RNQY",
-    thumbnail: "https://img.youtube.com/vi/Hs6KKj7RNQY/maxresdefault.jpg",
-    description: "Official trailer of Varshangalkku Shesham",
-    releaseDate: "2024-04-11",
-    duration: "2:41",
-    category: "latest",
-    views: "4.5M",
-  },
-  {
-    id: "8",
-    title: "Bougainvillea",
-    youtubeId: "dQw4w9WgXcQ",
-    thumbnail: "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
-    description: "Official trailer of the upcoming thriller Bougainvillea",
-    releaseDate: "2024-10-17",
-    duration: "2:28",
-    category: "upcoming",
-    views: "2.1M",
-  },
-  {
-    id: "9",
-    title: "Barroz",
-    youtubeId: "dQw4w9WgXcQ",
-    thumbnail: "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
-    description: "Official trailer of Mohanlal's directorial debut Barroz",
-    releaseDate: "2024-12-25",
-    duration: "2:55",
-    category: "upcoming",
-    views: "5.3M",
-  },
-  {
-    id: "10",
-    title: "Drishyam",
-    youtubeId: "AuuX2j14NBg",
-    thumbnail: "https://img.youtube.com/vi/AuuX2j14NBg/maxresdefault.jpg",
-    description: "Official trailer of the classic thriller Drishyam",
-    releaseDate: "2013-12-19",
-    duration: "2:22",
-    category: "classic",
-    views: "25M",
-  },
-  {
-    id: "11",
-    title: "Bangalore Days",
-    youtubeId: "H0jdKGtSmkY",
-    thumbnail: "https://img.youtube.com/vi/H0jdKGtSmkY/maxresdefault.jpg",
-    description: "Official trailer of the beloved film Bangalore Days",
-    releaseDate: "2014-05-30",
-    duration: "2:38",
-    category: "classic",
-    views: "18M",
-  },
-]
+const trailers: Trailer[] = trailersData
 
 export default function TrailerGrid() {
   const [selectedTrailer, setSelectedTrailer] = useState<Trailer | null>(null)
@@ -173,21 +63,12 @@ export default function TrailerGrid() {
   return (
     <div className="space-y-6">
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
+        <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="latest">Latest Trailers</TabsTrigger>
-          <TabsTrigger value="upcoming">Upcoming</TabsTrigger>
           <TabsTrigger value="classic">Classic Trailers</TabsTrigger>
         </TabsList>
 
         <TabsContent value="latest" className="mt-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredTrailers.map((trailer) => (
-              <TrailerCard key={trailer.id} trailer={trailer} onClick={() => setSelectedTrailer(trailer)} />
-            ))}
-          </div>
-        </TabsContent>
-
-        <TabsContent value="upcoming" className="mt-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredTrailers.map((trailer) => (
               <TrailerCard key={trailer.id} trailer={trailer} onClick={() => setSelectedTrailer(trailer)} />
