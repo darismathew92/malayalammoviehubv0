@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation"
 
 const navItems = [
   { href: "/", label: "OTT Releases" },
+  { href: "/featured", label: "Featured" }, // Added Featured section to navigation
   { href: "/upcoming", label: "Theater Releases" },
   { href: "/youtube", label: "YouTube Movies" },
   { href: "/trailers", label: "Trailers" },

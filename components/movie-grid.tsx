@@ -1,12 +1,12 @@
 "use client"
 
 import React from "react"
-import { useState, useEffect, useMemo, useCallback } from "react"
+import { useState, useEffect, useMemo, useCallback, Suspense } from "react"
 import { Calendar, Info, Star, Film, Play } from "lucide-react"
+import dynamic from "next/dynamic"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Badge } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
 import { OptimizedImage } from "@/components/optimized-image"
@@ -15,7 +15,16 @@ import { useMovieCache } from "@/contexts/movie-cache-context"
 
 import { getMovieDetails, getSpecificMovies, type Movie, type MovieDetails } from "@/lib/api"
 
-// Movie list with platform information
+const Dialog = dynamic(() => import("@/components/ui/dialog").then((mod) => ({ default: mod.Dialog })), {
+  loading: () => <div className="animate-pulse bg-gray-200 rounded-lg h-96" />,
+})
+const DialogContent = dynamic(() => import("@/components/ui/dialog").then((mod) => ({ default: mod.DialogContent })))
+const DialogDescription = dynamic(() =>
+  import("@/components/ui/dialog").then((mod) => ({ default: mod.DialogDescription })),
+)
+const DialogHeader = dynamic(() => import("@/components/ui/dialog").then((mod) => ({ default: mod.DialogHeader })))
+const DialogTitle = dynamic(() => import("@/components/ui/dialog").then((mod) => ({ default: mod.DialogTitle })))
+
 const MOVIE_LIST = [
   { title: "Meesha", platform: "Sun NXT,OTT Play Premium" },
   { title: "Flask", platform: "Manorama Max" },
@@ -53,6 +62,23 @@ const PLATFORM_COLORS: Record<string, string> = {
   "Apple TV+": "bg-gray-800 hover:bg-gray-900",
 }
 
+const MovieCardSkeleton = React.memo(() => (
+  <Card className="overflow-hidden animate-pulse">
+    <CardHeader className="p-0">
+      <div className="aspect-[3/4] bg-gradient-to-br from-gray-200 to-gray-300" />
+    </CardHeader>
+    <CardContent className="p-3 md:p-4 space-y-2">
+      <div className="h-4 bg-gray-200 rounded-md w-3/4" />
+      <div className="h-3 bg-gray-200 rounded-md w-1/2" />
+    </CardContent>
+    <CardFooter className="p-3 md:p-4 pt-0">
+      <div className="h-8 bg-gray-200 rounded-md w-full" />
+    </CardFooter>
+  </Card>
+))
+
+MovieCardSkeleton.displayName = "MovieCardSkeleton"
+
 const MovieCard = React.memo(
   ({
     movie,
@@ -63,25 +89,35 @@ const MovieCard = React.memo(
     onMovieClick: (movie: Movie & { platform?: string }) => void
     getPlatformColor: (platform: string) => string
   }) => {
+    const [isHovered, setIsHovered] = useState(false)
+
     return (
-      <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-200">
+      <Card
+        className="overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
         <CardHeader className="p-0">
-          <div className="aspect-[3/4] relative">
+          <div className="aspect-[3/4] relative group">
             <OptimizedImage
               src={movie.poster || "/placeholder.svg"}
               alt={movie.title}
               width={300}
               height={400}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               loading="lazy"
               priority={false}
             />
             {movie.platform && (
-              <div className="absolute top-2 right-2">
-                <Badge className={`${getPlatformColor(movie.platform)} text-white text-xs`}>{movie.platform}</Badge>
+              <div className="absolute top-2 right-2 z-10">
+                <Badge
+                  className={`${getPlatformColor(movie.platform)} text-white text-xs shadow-lg transition-transform duration-200 ${isHovered ? "scale-105" : ""}`}
+                >
+                  {movie.platform}
+                </Badge>
               </div>
             )}
-            <div className="absolute top-2 left-2">
+            <div className="absolute top-2 left-2 z-10">
               <WatchlistButton
                 item={{
                   id: movie.id,
@@ -95,23 +131,48 @@ const MovieCard = React.memo(
                 size="sm"
               />
             </div>
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3 md:p-4">
-              <h3 className="font-bold text-white text-sm md:text-lg line-clamp-2">{movie.title}</h3>
-              <div className="flex items-center gap-2 text-white/80 text-xs md:text-sm mt-1">
-                <Calendar className="h-3 w-3" />
-                <span>{movie.year}</span>
+            <div
+              className="absolute bottom-0 left-0 right-0 p-3 md:p-4 transition-all duration-300"
+              style={{
+                background:
+                  "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 40%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,0.3) 100%)",
+                backdropFilter: "blur(2px)",
+              }}
+            >
+              <h3
+                className="font-bold text-sm md:text-lg line-clamp-2 mb-1"
+                style={{
+                  color: "#ffffff",
+                  textShadow: "2px 2px 4px rgba(0,0,0,1), 1px 1px 2px rgba(0,0,0,1)",
+                }}
+              >
+                {movie.title}
+              </h3>
+              <div className="flex items-center gap-2 text-xs md:text-sm">
+                <Calendar
+                  className="h-3 w-3 flex-shrink-0"
+                  style={{ color: "#ffffff", filter: "drop-shadow(2px 2px 4px rgba(0,0,0,1))" }}
+                />
+                <span
+                  style={{
+                    color: "#ffffff",
+                    textShadow: "1px 1px 2px rgba(0,0,0,1)",
+                  }}
+                >
+                  {movie.year}
+                </span>
               </div>
             </div>
           </div>
         </CardHeader>
         <CardContent className="p-3 md:p-4">
-          <div className="flex flex-wrap gap-1 md:gap-2">
+          <div className="flex flex-wrap gap-1 md:gap-2 items-center">
             <Badge variant="outline" className="capitalize text-xs">
               {movie.type}
             </Badge>
             {movie.platform && (
               <div className="flex items-center text-xs md:text-sm text-muted-foreground">
-                <Play className="h-3 w-3 mr-1" />
+                <Play className="h-3 w-3 mr-1 flex-shrink-0" />
                 <span className="truncate">Watch on {movie.platform}</span>
               </div>
             )}
@@ -120,11 +181,11 @@ const MovieCard = React.memo(
         <CardFooter className="p-3 md:p-4 pt-0">
           <Button
             variant="secondary"
-            className="w-full text-xs md:text-sm h-8 md:h-10"
+            className="w-full text-xs md:text-sm h-8 md:h-10 transition-all duration-200 hover:bg-primary hover:text-primary-foreground"
             onClick={() => onMovieClick(movie)}
           >
             <Info className="h-3 w-3 md:h-4 md:w-4 mr-1 md:mr-2" />
-            Details
+            View Details
           </Button>
         </CardFooter>
       </Card>
@@ -151,7 +212,7 @@ export default function MovieGrid() {
   }, [])
 
   const fetchMovies = useCallback(
-    async (movieTitles: string[]) => {
+    async (movieTitles: string[], retryCount = 0) => {
       const cachedMovies = getCachedMovies()
       if (cachedMovies && cachedMovies.length > 0) {
         const moviesWithPlatform = cachedMovies.map((movie) => {
@@ -183,13 +244,17 @@ export default function MovieGrid() {
         setCachedMovies(result)
 
         if (result.length === 0) {
-          setError("No movies found. Please check the movie titles in the code.")
+          setError("No movies found. Please check your internet connection.")
         } else if (result.length < movieTitles.length) {
-          setError(`Found ${result.length} out of ${movieTitles.length} movies. Some titles may be incorrect.`)
+          console.warn(`Found ${result.length} out of ${movieTitles.length} movies. Some titles may be incorrect.`)
         }
       } catch (err) {
-        setError("Failed to fetch movies. Please try again later.")
-        console.error(err)
+        console.error("Failed to fetch movies:", err)
+        if (retryCount < 2) {
+          setTimeout(() => fetchMovies(movieTitles, retryCount + 1), 2000)
+          return
+        }
+        setError("Failed to load movies. Please check your internet connection and try again.")
       } finally {
         setLoading(false)
       }
@@ -228,7 +293,7 @@ export default function MovieGrid() {
           setError("Failed to load movie details")
         }
       } catch (err) {
-        console.error(err)
+        console.error("Error fetching movie details:", err)
         setError("An error occurred while fetching movie details")
       } finally {
         setLoadingDetails(false)
@@ -237,36 +302,42 @@ export default function MovieGrid() {
     [getCachedMovieDetails, setCachedMovieDetails],
   )
 
+  const handleRetry = useCallback(() => {
+    fetchMovies(movieTitles)
+  }, [fetchMovies, movieTitles])
+
   return (
     <>
       {error && (
-        <div className="bg-destructive/15 text-destructive p-3 md:p-4 rounded-md mb-4 md:mb-6 mx-4 md:mx-0 text-sm md:text-base">
-          {error}
+        <div className="bg-destructive/15 border border-destructive/20 text-destructive p-4 rounded-lg mb-6 mx-4 md:mx-0">
+          <div className="flex items-center justify-between">
+            <p className="text-sm md:text-base">{error}</p>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleRetry}
+              className="ml-4 border-destructive/20 hover:bg-destructive/10 bg-transparent"
+            >
+              Retry
+            </Button>
+          </div>
         </div>
       )}
 
       {loading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 mt-8">
-          {Array.from({ length: 8 }, (_, index) => (
-            <Card key={index} className="overflow-hidden">
-              <CardHeader className="p-0">
-                <div className="aspect-[3/4] bg-gray-200" />
-              </CardHeader>
-              <CardContent className="p-3 md:p-4">
-                <div className="h-4 bg-gray-200 rounded mb-2" />
-                <div className="h-3 bg-gray-200 rounded w-3/4" />
-              </CardContent>
-              <CardFooter className="p-3 md:p-4 pt-0">
-                <div className="h-8 bg-gray-200 rounded w-full" />
-              </CardFooter>
-            </Card>
+          {Array.from({ length: 12 }, (_, index) => (
+            <MovieCardSkeleton key={index} />
           ))}
         </div>
       ) : movies.length === 0 ? (
-        <div className="text-center py-12">
-          <Film className="mx-auto h-12 w-12 text-muted-foreground" />
-          <h3 className="mt-4 text-lg font-semibold">No movies found</h3>
-          <p className="text-muted-foreground">Please check the movie titles in the configuration</p>
+        <div className="text-center py-16">
+          <Film className="mx-auto h-16 w-16 text-muted-foreground mb-4" />
+          <h3 className="text-xl font-semibold mb-2">No movies found</h3>
+          <p className="text-muted-foreground mb-4">Unable to load movie data at this time</p>
+          <Button onClick={handleRetry} variant="outline">
+            Try Again
+          </Button>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 mt-8">
@@ -281,85 +352,92 @@ export default function MovieGrid() {
         </div>
       )}
 
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="sm:max-w-[600px] mx-4 max-h-[90vh] overflow-y-auto">
-          {loadingDetails ? (
-            <div className="space-y-4 py-4">
-              <div className="flex gap-4">
-                <Skeleton className="w-24 h-32 rounded-md" />
-                <div className="flex-1 space-y-2">
-                  <Skeleton className="h-6 w-3/4" />
-                  <Skeleton className="h-4 w-full" />
-                  <Skeleton className="h-4 w-full" />
-                  <Skeleton className="h-4 w-2/3" />
+      <Suspense fallback={<div className="animate-pulse bg-gray-200 rounded-lg h-96" />}>
+        <Dialog open={open} onOpenChange={setOpen}>
+          <DialogContent className="sm:max-w-[600px] mx-4 max-h-[90vh] overflow-y-auto">
+            {loadingDetails ? (
+              <div className="space-y-4 py-4">
+                <div className="flex gap-4">
+                  <Skeleton className="w-24 h-32 rounded-md" />
+                  <div className="flex-1 space-y-2">
+                    <Skeleton className="h-6 w-3/4" />
+                    <Skeleton className="h-4 w-full" />
+                    <Skeleton className="h-4 w-full" />
+                    <Skeleton className="h-4 w-2/3" />
+                  </div>
                 </div>
               </div>
-            </div>
-          ) : selectedMovie ? (
-            <>
-              <DialogHeader>
-                <DialogTitle>{selectedMovie.Title}</DialogTitle>
-                <DialogDescription>
-                  {selectedMovie.Year} • {selectedMovie.Runtime}
-                </DialogDescription>
-              </DialogHeader>
-              <div className="grid gap-4">
-                <div className="flex items-start gap-4">
-                  <img
-                    src={
-                      selectedMovie.Poster !== "N/A" ? selectedMovie.Poster : "/placeholder.svg?height=400&width=300"
-                    }
-                    alt={selectedMovie.Title}
-                    className="w-24 h-32 object-cover rounded-md"
-                  />
-                  <div>
-                    <p className="text-sm">{selectedMovie.Plot}</p>
-                    <div className="mt-2 flex flex-wrap gap-2">
-                      <Badge className="flex items-center gap-1">
-                        <Star className="h-3 w-3" />
-                        {selectedMovie.imdbRating}
-                      </Badge>
-                      {selectedMovie.Genre.split(", ").map((genre) => (
-                        <Badge key={genre} variant="outline">
-                          {genre}
+            ) : selectedMovie ? (
+              <>
+                <DialogHeader>
+                  <DialogTitle className="text-xl font-bold">{selectedMovie.Title}</DialogTitle>
+                  <DialogDescription className="text-base">
+                    {selectedMovie.Year} • {selectedMovie.Runtime}
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="grid gap-4">
+                  <div className="flex items-start gap-4">
+                    <OptimizedImage
+                      src={selectedMovie.Poster !== "N/A" ? selectedMovie.Poster : "/placeholder.svg"}
+                      alt={selectedMovie.Title}
+                      width={96}
+                      height={128}
+                      className="w-24 h-32 rounded-md flex-shrink-0"
+                      priority={true}
+                    />
+                    <div className="flex-1">
+                      <p className="text-sm leading-relaxed mb-3">{selectedMovie.Plot}</p>
+                      <div className="flex flex-wrap gap-2">
+                        <Badge className="flex items-center gap-1 bg-yellow-500 hover:bg-yellow-600">
+                          <Star className="h-3 w-3" />
+                          {selectedMovie.imdbRating}
                         </Badge>
-                      ))}
+                        {selectedMovie.Genre.split(", ").map((genre) => (
+                          <Badge key={genre} variant="outline">
+                            {genre}
+                          </Badge>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div>
-                  <h4 className="font-medium mb-1">Director</h4>
-                  <p className="text-sm text-muted-foreground">{selectedMovie.Director}</p>
-                </div>
-                <div>
-                  <h4 className="font-medium mb-1">Cast</h4>
-                  <p className="text-sm text-muted-foreground">{selectedMovie.Actors}</p>
-                </div>
-                <div>
-                  <h4 className="font-medium mb-1">Language</h4>
-                  <p className="text-sm text-muted-foreground">{selectedMovie.Language}</p>
-                </div>
-                {selectedMovie.platform && (
-                  <div>
-                    <h4 className="font-medium mb-1">Available on</h4>
-                    <p className="text-sm text-muted-foreground">{selectedMovie.platform}</p>
+                  <div className="grid gap-3">
+                    <div>
+                      <h4 className="font-semibold mb-1 text-sm">Director</h4>
+                      <p className="text-sm text-muted-foreground">{selectedMovie.Director}</p>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold mb-1 text-sm">Cast</h4>
+                      <p className="text-sm text-muted-foreground">{selectedMovie.Actors}</p>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold mb-1 text-sm">Language</h4>
+                      <p className="text-sm text-muted-foreground">{selectedMovie.Language}</p>
+                    </div>
+                    {selectedMovie.platform && (
+                      <div>
+                        <h4 className="font-semibold mb-1 text-sm">Available on</h4>
+                        <p className="text-sm text-muted-foreground">{selectedMovie.platform}</p>
+                      </div>
+                    )}
                   </div>
-                )}
-                <div className="flex justify-end">
-                  <Button onClick={() => setOpen(false)}>Close</Button>
+                  <div className="flex justify-end pt-2">
+                    <Button onClick={() => setOpen(false)} className="px-6">
+                      Close
+                    </Button>
+                  </div>
                 </div>
+              </>
+            ) : (
+              <div className="text-center py-8">
+                <p className="text-muted-foreground mb-4">Failed to load movie details</p>
+                <Button onClick={() => setOpen(false)} variant="outline">
+                  Close
+                </Button>
               </div>
-            </>
-          ) : (
-            <div className="text-center py-8">
-              <p>Failed to load movie details</p>
-              <Button onClick={() => setOpen(false)} className="mt-4">
-                Close
-              </Button>
-            </div>
-          )}
-        </DialogContent>
-      </Dialog>
+            )}
+          </DialogContent>
+        </Dialog>
+      </Suspense>
     </>
   )
 }

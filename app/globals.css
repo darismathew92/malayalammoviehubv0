@@ -10,6 +10,49 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Added mobile-optimized touch interactions */
+  .touch-manipulation {
+    touch-action: manipulation;
+  }
+
+  /* Enhanced mobile scrolling */
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+
+  /* Better mobile tap highlights */
+  .tap-highlight-none {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Force contrast fixes for accessibility */
+  .force-white-text {
+    color: #ffffff !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1) !important;
+  }
+
+  .force-black-bg {
+    background-color: #000000 !important;
+  }
+
+  .force-gradient-overlay {
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.9) 40%,
+      rgba(0, 0, 0, 0.7) 70%,
+      rgba(0, 0, 0, 0.3) 100%
+    ) !important;
+  }
+
+  .skip-link-override {
+    position: fixed !important;
+    z-index: 99999 !important;
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff !important;
+  }
 }
 
 @layer base {
@@ -86,9 +129,45 @@ body {
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border tap-highlight-none;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground scroll-smooth;
+  }
+
+  /* Enhanced mobile viewport handling */
+  html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+  }
+
+  /* Better mobile input handling */
+  input,
+  textarea,
+  select {
+    @apply touch-manipulation;
+  }
+
+  /* Force accessibility fixes */
+  .movie-card-overlay {
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.9) 40%,
+      rgba(0, 0, 0, 0.7) 70%,
+      rgba(0, 0, 0, 0.3) 100%
+    ) !important;
+  }
+
+  .movie-card-text {
+    color: #ffffff !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1) !important;
+  }
+
+  .skip-link {
+    position: fixed !important;
+    z-index: 99999 !important;
+    background-color: #000000 !important;
+    color: #ffffff !important;
   }
 }

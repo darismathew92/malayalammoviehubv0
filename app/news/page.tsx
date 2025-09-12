@@ -13,7 +13,7 @@ export default function NewsPage() {
               <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-lg">M</span>
               </div>
-              <span className="text-xl font-bold text-gray-900 hidden sm:block">Malayalam Movies Hub</span>
+              <span className="text-xl font-bold text-gray-900">Malayalam Movies Hub</span>
             </Link>
             <MobileNav />
           </div>
