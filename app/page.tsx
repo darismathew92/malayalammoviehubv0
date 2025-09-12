@@ -1,7 +1,7 @@
 import Link from "next/link"
 import MovieGrid from "@/components/movie-grid"
 import RandomMovieGenerator from "@/components/random-movie-generator"
-import MobileNav from "@/components/mobile-nav"
+import { MobileNav } from "@/components/mobile-nav"
 import DesktopNav from "@/components/desktop-nav"
 import { BreadcrumbStructuredData, WebPageStructuredData } from "@/components/seo/structured-data"
 import { ScreenReaderText } from "@/components/accessibility/screen-reader-text"
@@ -32,10 +32,7 @@ export default function Home() {
         url="https://malayalammovieshub.com"
       />
 
-      <header
-        className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm"
-        role="banner"
-      >
+      <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm" role="banner">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center gap-3">
