@@ -48,7 +48,7 @@ export default function Home() {
                   <span className="text-white font-bold text-sm">M</span>
                 </div>
                 <span className="text-lg md:text-xl font-bold text-gray-900">
-                  <span className="sm:hidden">Malayalam Movies</span>
+                  <span className="sm:hidden">Malayalam Movies Hub</span>
                   <span className="hidden sm:inline">Malayalam Movies Hub</span>
                 </span>
               </Link>
