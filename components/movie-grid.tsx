@@ -2,7 +2,6 @@
 
 import React from "react"
 import { useState, useEffect, useMemo, useCallback, Suspense } from "react"
-import { Calendar, Info, Star, Film, Play } from "lucide-react"
 import dynamic from "next/dynamic"
 
 import { Button } from "@/components/ui/button"
@@ -14,6 +13,56 @@ import { WatchlistButton } from "@/components/watchlist-button"
 import { useMovieCache } from "@/contexts/movie-cache-context"
 
 import { getMovieDetails, getSpecificMovies, type Movie, type MovieDetails } from "@/lib/api"
+
+const CalendarIcon = () => (
+  <svg className="h-3 w-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+    />
+  </svg>
+)
+
+const InfoIcon = () => (
+  <svg className="h-3 w-3 md:h-4 md:w-4 mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+    />
+  </svg>
+)
+
+const StarIcon = () => (
+  <svg className="h-3 w-3" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+  </svg>
+)
+
+const FilmIcon = () => (
+  <svg className="mx-auto h-16 w-16 text-muted-foreground mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m0 0V1a1 1 0 011 1v2m0 0v16l-4-2-4 2V4m8 0H8m0 0V1a1 1 0 00-1 1v2"
+    />
+  </svg>
+)
+
+const PlayIcon = () => (
+  <svg className="h-3 w-3 mr-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293H15"
+    />
+  </svg>
+)
 
 const Dialog = dynamic(() => import("@/components/ui/dialog").then((mod) => ({ default: mod.Dialog })), {
   loading: () => <div className="animate-pulse bg-gray-200 rounded-lg h-96" />,
@@ -149,10 +198,7 @@ const MovieCard = React.memo(
                 {movie.title}
               </h3>
               <div className="flex items-center gap-2 text-xs md:text-sm">
-                <Calendar
-                  className="h-3 w-3 flex-shrink-0"
-                  style={{ color: "#ffffff", filter: "drop-shadow(2px 2px 4px rgba(0,0,0,1))" }}
-                />
+                <CalendarIcon />
                 <span
                   style={{
                     color: "#ffffff",
@@ -172,7 +218,7 @@ const MovieCard = React.memo(
             </Badge>
             {movie.platform && (
               <div className="flex items-center text-xs md:text-sm text-muted-foreground">
-                <Play className="h-3 w-3 mr-1 flex-shrink-0" />
+                <PlayIcon />
                 <span className="truncate">Watch on {movie.platform}</span>
               </div>
             )}
@@ -184,7 +230,7 @@ const MovieCard = React.memo(
             className="w-full text-xs md:text-sm h-8 md:h-10 transition-all duration-200 hover:bg-primary hover:text-primary-foreground"
             onClick={() => onMovieClick(movie)}
           >
-            <Info className="h-3 w-3 md:h-4 md:w-4 mr-1 md:mr-2" />
+            <InfoIcon />
             View Details
           </Button>
         </CardFooter>
@@ -332,7 +378,7 @@ export default function MovieGrid() {
         </div>
       ) : movies.length === 0 ? (
         <div className="text-center py-16">
-          <Film className="mx-auto h-16 w-16 text-muted-foreground mb-4" />
+          <FilmIcon />
           <h3 className="text-xl font-semibold mb-2">No movies found</h3>
           <p className="text-muted-foreground mb-4">Unable to load movie data at this time</p>
           <Button onClick={handleRetry} variant="outline">
@@ -389,7 +435,7 @@ export default function MovieGrid() {
                       <p className="text-sm leading-relaxed mb-3">{selectedMovie.Plot}</p>
                       <div className="flex flex-wrap gap-2">
                         <Badge className="flex items-center gap-1 bg-yellow-500 hover:bg-yellow-600">
-                          <Star className="h-3 w-3" />
+                          <StarIcon />
                           {selectedMovie.imdbRating}
                         </Badge>
                         {selectedMovie.Genre.split(", ").map((genre) => (

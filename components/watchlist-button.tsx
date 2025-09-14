@@ -3,11 +3,27 @@
 import type React from "react"
 
 import { useState } from "react"
-import { Heart, Check } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useWatchlist } from "@/hooks/use-watchlist"
 import { toast } from "@/hooks/use-toast"
 import type { WatchlistItem } from "@/lib/watchlist"
+
+const HeartIcon = () => (
+  <svg className="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+    />
+  </svg>
+)
+
+const CheckIcon = () => (
+  <svg className="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+  </svg>
+)
 
 interface WatchlistButtonProps {
   item: Omit<WatchlistItem, "addedAt">
@@ -64,12 +80,12 @@ export function WatchlistButton({ item, variant = "outline", size = "sm", showTe
     >
       {inWatchlist ? (
         <>
-          <Check className="h-4 w-4 mr-1" />
+          <CheckIcon />
           {showText && "In Watchlist"}
         </>
       ) : (
         <>
-          <Heart className="h-4 w-4 mr-1" />
+          <HeartIcon />
           {showText && "Add to Watchlist"}
         </>
       )}

@@ -1,13 +1,22 @@
 "use client"
 
 import { useState } from "react"
-import { Sparkles } from "lucide-react"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { getMovieByTitle } from "@/lib/api"
 import type { Movie } from "@/lib/api"
-// Import VisuallyHidden
+
+const SparklesIcon = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M5 3l1.5 1.5L5 6l-1.5-1.5L5 3zM19 3l1.5 1.5L19 6l-1.5-1.5L19 3zM12 8l1.5 1.5L12 11l-1.5-1.5L12 8zM5 17l1.5 1.5L5 20l-1.5-1.5L5 17zM19 17l1.5 1.5L19 20l-1.5-1.5L19 17z"
+    />
+  </svg>
+)
 
 // Extended list of Malayalam movies for random selection
 const MALAYALAM_MOVIES = [
@@ -315,7 +324,7 @@ export default function RandomMovieGenerator() {
         className="relative group"
         title="Get a random Malayalam movie recommendation"
       >
-        <Sparkles className="h-5 w-5 text-yellow-500 group-hover:animate-pulse" />
+        <SparklesIcon className="h-5 w-5 text-yellow-500 group-hover:animate-pulse" />
         <span className="sr-only">Random Movie Generator</span>
         <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 hidden group-hover:block text-xs bg-black/80 text-white px-2 py-1 rounded whitespace-nowrap">
           Random Movie
@@ -326,7 +335,7 @@ export default function RandomMovieGenerator() {
         <DialogContent className="sm:max-w-[500px]">
           {loading ? (
             <div className="py-10 text-center">
-              <Sparkles className="h-10 w-10 text-yellow-500 animate-pulse mx-auto mb-4" />
+              <SparklesIcon className="h-10 w-10 text-yellow-500 animate-pulse mx-auto mb-4" />
               <p className="text-lg font-medium">Finding your perfect Malayalam movie...</p>
             </div>
           ) : randomMovie ? (
