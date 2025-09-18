@@ -1,4 +1,5 @@
 import MobileNav from "@/components/mobile-nav"
+import DesktopNav from "@/components/desktop-nav"
 import Link from "next/link"
 
 export const metadata = {
@@ -31,22 +32,28 @@ export default function FeaturedPage() {
         </div>
       </header>
 
-      <main className="flex-1 flex items-center justify-center p-4">
-        <div className="w-full max-w-4xl">
-          <div className="text-center mb-8">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">Featured Short Film</h1>
-          </div>
+      <main className="flex-1 p-4">
+        <div className="max-w-7xl mx-auto">
+          <DesktopNav />
+        </div>
 
-          <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
-            <iframe
-              className="absolute top-0 left-0 w-full h-full rounded-lg shadow-lg"
-              src="https://www.youtube.com/embed/QPdiI35EzsM?si=QRIEtH0SCAy51Ha4"
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            />
+        <div className="flex items-center justify-center">
+          <div className="w-full max-w-4xl">
+            <div className="text-center mb-8">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">Featured Short Film</h1>
+            </div>
+
+            <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+              <iframe
+                className="absolute top-0 left-0 w-full h-full rounded-lg shadow-lg"
+                src="https://www.youtube.com/embed/QPdiI35EzsM?si=QRIEtH0SCAy51Ha4"
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            </div>
           </div>
         </div>
       </main>
