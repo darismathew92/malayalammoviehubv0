@@ -15,8 +15,8 @@ import { getMovieDetails, getSpecificMovies, type Movie, type MovieDetails } fro
 // Movie list with theater information
 const UPCOMING_MOVIE_LIST = [
   { title: "Lokah Chapter One: Chandra", theater: "PVR Cinemas", releaseDate: "28 August 2025" },
-  { title: "Hridayapoorvam", theater: "INOX", releaseDate: "28 August 2025" },
-  { title: "Odum Kuthira Chadum Kuthira", theater: "PVR Cinemas", releaseDate: "29 August 2025" },
+  { title: "mirage", theater: "INOX", releaseDate: "19 September 2025" },
+  { title: "Vala - Story of a Bangle", theater: "PVR Cinemas", releaseDate: "19 September 2025" },
 ]
 
 // Theater colors for badges
