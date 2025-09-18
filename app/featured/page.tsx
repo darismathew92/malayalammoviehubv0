@@ -32,30 +32,43 @@ export default function FeaturedPage() {
         </div>
       </header>
 
-      <main className="flex-1 p-4">
-        <div className="max-w-7xl mx-auto">
-          <DesktopNav />
-        </div>
-
-        <div className="flex items-center justify-center">
-          <div className="w-full max-w-4xl">
-            <div className="text-center mb-8">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">Featured Short Film</h1>
-            </div>
-
-            <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
-              <iframe
-                className="absolute top-0 left-0 w-full h-full rounded-lg shadow-lg"
-                src="https://www.youtube.com/embed/QPdiI35EzsM?si=QRIEtH0SCAy51Ha4"
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-              />
-            </div>
+      <main className="flex-1" id="main-content" role="main">
+        <section
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8 lg:py-12"
+          aria-labelledby="main-heading"
+        >
+          <div className="text-center mb-8 md:mb-12">
+            <h1
+              id="main-heading"
+              className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight px-2"
+            >
+              Featured Short Film
+            </h1>
+            <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed px-2">
+              Watch our featured Malayalam short film - a showcase of exceptional storytelling and cinematic excellence.
+            </p>
           </div>
-        </div>
+
+          <nav className="mb-8" aria-label="Main navigation" id="navigation" role="navigation">
+            <DesktopNav />
+          </nav>
+
+          <section className="flex items-center justify-center">
+            <div className="w-full max-w-4xl">
+              <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+                <iframe
+                  className="absolute top-0 left-0 w-full h-full rounded-lg shadow-lg"
+                  src="https://www.youtube.com/embed/QPdiI35EzsM?si=QRIEtH0SCAy51Ha4"
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+          </section>
+        </section>
       </main>
 
       <footer className="bg-white border-t border-gray-200 mt-auto">
