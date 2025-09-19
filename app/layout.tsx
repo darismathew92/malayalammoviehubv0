@@ -202,6 +202,13 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="//pl26236383.revenuecpmgate.com" />
         <link rel="dns-prefetch" href="//www.revenuecpmgate.com" />
 
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3997090848958699"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         <link rel="alternate" type="application/rss+xml" title="Malayalam Movies Hub RSS Feed" href="/rss.xml" />
       </head>
