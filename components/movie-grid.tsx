@@ -8,6 +8,15 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+  PaginationEllipsis,
+} from "@/components/ui/pagination"
 import { OptimizedImage } from "@/components/optimized-image"
 import { WatchlistButton } from "@/components/watchlist-button"
 import { useMovieCache } from "@/contexts/movie-cache-context"
@@ -248,6 +257,8 @@ export default function MovieGrid() {
   const [error, setError] = useState<string | null>(null)
   const [open, setOpen] = useState(false)
   const [loadingDetails, setLoadingDetails] = useState(false)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [moviesPerPage] = useState(12) // Show 12 movies per page
 
   const { getCachedMovies, setCachedMovies, getCachedMovieDetails, setCachedMovieDetails } = useMovieCache()
 
@@ -256,6 +267,28 @@ export default function MovieGrid() {
   const getPlatformColor = useCallback((platform: string) => {
     return PLATFORM_COLORS[platform] || "bg-gray-600 hover:bg-gray-700"
   }, [])
+
+  const totalPages = Math.ceil(movies.length / moviesPerPage)
+  const startIndex = (currentPage - 1) * moviesPerPage
+  const endIndex = startIndex + moviesPerPage
+  const currentMovies = movies.slice(startIndex, endIndex)
+
+  const handlePageChange = useCallback((page: number) => {
+    setCurrentPage(page)
+    document.getElementById("movies")?.scrollIntoView({ behavior: "smooth" })
+  }, [])
+
+  const handlePreviousPage = useCallback(() => {
+    if (currentPage > 1) {
+      handlePageChange(currentPage - 1)
+    }
+  }, [currentPage, handlePageChange])
+
+  const handleNextPage = useCallback(() => {
+    if (currentPage < totalPages) {
+      handlePageChange(currentPage + 1)
+    }
+  }, [currentPage, totalPages, handlePageChange])
 
   const fetchMovies = useCallback(
     async (movieTitles: string[], retryCount = 0) => {
@@ -275,8 +308,15 @@ export default function MovieGrid() {
 
       setLoading(true)
       setError(null)
+
+      console.log("[v0] Starting to fetch movies...", new Date().toISOString())
+      const startTime = Date.now()
+
       try {
         const result = await getSpecificMovies(movieTitles)
+
+        const endTime = Date.now()
+        console.log(`[v0] Fetched ${result.length} movies in ${endTime - startTime}ms`)
 
         const moviesWithPlatform = result.map((movie) => {
           const movieInfo = MOVIE_LIST.find((item) => item.title.toLowerCase() === movie.title.toLowerCase())
@@ -297,6 +337,7 @@ export default function MovieGrid() {
       } catch (err) {
         console.error("Failed to fetch movies:", err)
         if (retryCount < 2) {
+          console.log(`[v0] Retrying... attempt ${retryCount + 1}`)
           setTimeout(() => fetchMovies(movieTitles, retryCount + 1), 2000)
           return
         }
@@ -311,6 +352,10 @@ export default function MovieGrid() {
   useEffect(() => {
     fetchMovies(movieTitles)
   }, [fetchMovies, movieTitles])
+
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [movies.length])
 
   const handleMovieClick = useCallback(
     async (movie: Movie & { platform?: string }) => {
@@ -386,16 +431,99 @@ export default function MovieGrid() {
           </Button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 mt-8">
-          {movies.map((movie) => (
-            <MovieCard
-              key={movie.id}
-              movie={movie}
-              onMovieClick={handleMovieClick}
-              getPlatformColor={getPlatformColor}
-            />
-          ))}
-        </div>
+        <>
+          <div className="flex items-center justify-between mb-6 px-2">
+            <p className="text-sm text-muted-foreground">
+              Showing {startIndex + 1}-{Math.min(endIndex, movies.length)} of {movies.length} movies
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Page {currentPage} of {totalPages}
+            </p>
+          </div>
+
+          <div
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 mt-8"
+            id="movies"
+          >
+            {currentMovies.map((movie) => (
+              <MovieCard
+                key={movie.id}
+                movie={movie}
+                onMovieClick={handleMovieClick}
+                getPlatformColor={getPlatformColor}
+              />
+            ))}
+          </div>
+
+          {totalPages > 1 && (
+            <div className="mt-12 flex justify-center">
+              <Pagination>
+                <PaginationContent>
+                  <PaginationItem>
+                    <PaginationPrevious
+                      onClick={handlePreviousPage}
+                      className={currentPage === 1 ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                    />
+                  </PaginationItem>
+
+                  {currentPage > 2 && (
+                    <>
+                      <PaginationItem>
+                        <PaginationLink onClick={() => handlePageChange(1)} className="cursor-pointer">
+                          1
+                        </PaginationLink>
+                      </PaginationItem>
+                      {currentPage > 3 && (
+                        <PaginationItem>
+                          <PaginationEllipsis />
+                        </PaginationItem>
+                      )}
+                    </>
+                  )}
+
+                  {Array.from({ length: Math.min(3, totalPages) }, (_, i) => {
+                    const pageNum = Math.max(1, Math.min(totalPages - 2, currentPage - 1)) + i
+                    if (pageNum > totalPages) return null
+
+                    return (
+                      <PaginationItem key={pageNum}>
+                        <PaginationLink
+                          onClick={() => handlePageChange(pageNum)}
+                          isActive={pageNum === currentPage}
+                          className="cursor-pointer"
+                        >
+                          {pageNum}
+                        </PaginationLink>
+                      </PaginationItem>
+                    )
+                  })}
+
+                  {currentPage < totalPages - 1 && (
+                    <>
+                      {currentPage < totalPages - 2 && (
+                        <PaginationItem>
+                          <PaginationEllipsis />
+                        </PaginationItem>
+                      )}
+                      <PaginationItem>
+                        <PaginationLink onClick={() => handlePageChange(totalPages)} className="cursor-pointer">
+                          {totalPages}
+                        </PaginationLink>
+                      </PaginationItem>
+                    </>
+                  )}
+
+                  <PaginationItem>
+                    <PaginationNext
+                      onClick={handleNextPage}
+                      className={currentPage === totalPages ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                    />
+                  </PaginationItem>
+                </PaginationContent>
+              </Pagination>
+            </div>
+          )}
+        </>
       )}
 
       <Suspense fallback={<div className="animate-pulse bg-gray-200 rounded-lg h-96" />}>

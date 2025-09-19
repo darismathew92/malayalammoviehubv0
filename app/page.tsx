@@ -7,12 +7,25 @@ import { BreadcrumbStructuredData, WebPageStructuredData } from "@/components/se
 import { ScreenReaderText } from "@/components/accessibility/screen-reader-text"
 
 export const metadata = {
-  title: "Latest OTT Released Malayalam Movies September 2025",
+  title: "Malayalam Movies Online Watch - Latest OTT Released Movies September 2025",
   description:
-    "Discover the newest Malayalam films available on Netflix, Amazon Prime Video, Disney+ Hotstar, and other streaming platforms. Updated daily with latest releases.",
+    "Watch Malayalam movies online including Meesha Madhavan, Kumbalangi Nights, Trance, Ayyappanum Koshiyum. Latest released Malayalam movies on OTT platforms like Netflix, Amazon Prime, Disney+ Hotstar. Malayalam shortfilms, movie news and reviews.",
+  keywords: [
+    "malayalam movies online watch",
+    "latest released malayalam movies ott",
+    "ott malayalam movies",
+    "meesha madhavan malayalam movie",
+    "kumbalangi nights watch online",
+    "trance malayalam movie online",
+    "ayyappanum koshiyum full movie",
+    "malayalam shortfilms to watch",
+    "malayalam movie news",
+    "Latest OTT Released Malayalam Movies September 2025",
+  ],
   openGraph: {
-    title: "Latest OTT Released Malayalam Movies September 2025",
-    description: "Discover the newest Malayalam films available on streaming platforms",
+    title: "Malayalam Movies Online Watch - Latest OTT Released Movies September 2025",
+    description:
+      "Watch Malayalam movies online including popular films like Meesha Madhavan, Kumbalangi Nights, Trance. Latest OTT releases on Netflix, Amazon Prime, Disney+ Hotstar",
     images: ["/og-home.png"],
   },
 }
@@ -20,15 +33,15 @@ export const metadata = {
 export default function Home() {
   const breadcrumbItems = [
     { name: "Home", url: "https://malayalammovieshub.com" },
-    { name: "Latest Malayalam Movies", url: "https://malayalammovieshub.com/#movies" },
+    { name: "Malayalam Movies Online", url: "https://malayalammovieshub.com/#movies" },
   ]
 
   return (
     <div className="flex min-h-screen flex-col bg-gray-50">
       <BreadcrumbStructuredData items={breadcrumbItems} />
       <WebPageStructuredData
-        title="Latest OTT Released Malayalam Movies September 2025"
-        description="Discover the newest Malayalam films available on Netflix, Amazon Prime Video, Disney+ Hotstar, and other streaming platforms."
+        title="Malayalam Movies Online Watch - Latest OTT Released Movies September 2025"
+        description="Watch Malayalam movies online including Meesha Madhavan, Kumbalangi Nights, Trance, Ayyappanum Koshiyum. Latest released Malayalam movies on OTT platforms."
         url="https://malayalammovieshub.com"
       />
 
@@ -39,7 +52,7 @@ export default function Home() {
               <Link
                 href="/"
                 className="flex items-center gap-2 touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg"
-                aria-label="Malayalam Movies Hub - Go to homepage"
+                aria-label="Malayalam Movies Hub - Watch Malayalam Movies Online"
               >
                 <div
                   className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center shadow-sm"
@@ -69,16 +82,18 @@ export default function Home() {
           <div className="text-center mb-8 md:mb-12">
             <h1
               id="main-heading"
-              className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight px-2"
+              className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight px-2 text-balance"
             >
-              Latest OTT Released Malayalam Movies September 2025
+              Malayalam Movies Online Watch - Latest OTT Released Movies September 2025
             </h1>
-            <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed px-2">
-              Discover the newest Malayalam films available on popular streaming platforms like Netflix, Amazon Prime
-              Video, Disney+ Hotstar, and more.
+            <p className="text-base md:text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed px-2 text-pretty">
+              Watch Malayalam movies online including popular films like <strong>Meesha Madhavan</strong>,{" "}
+              <strong>Kumbalangi Nights</strong>, <strong>Trance</strong>, and <strong>Ayyappanum Koshiyum</strong>.
+              Discover the latest released Malayalam movies on OTT platforms like Netflix, Amazon Prime Video, Disney+
+              Hotstar. Find Malayalam shortfilms to watch, movie news, reviews and trailers all in one place.
               <ScreenReaderText>
-                This page contains a collection of the latest Malayalam movies released on various OTT platforms,
-                updated regularly with new releases.
+                This page contains a comprehensive collection of Malayalam movies available for online viewing,
+                including the latest OTT releases, classic films, and upcoming movies with trailers and reviews.
               </ScreenReaderText>
             </p>
           </div>
@@ -89,7 +104,7 @@ export default function Home() {
 
           <section className="mb-12 md:hidden" aria-labelledby="mobile-features-heading">
             <h2 id="mobile-features-heading" className="text-xl font-semibold text-gray-900 mb-6 text-center px-4">
-              Explore More Content
+              Explore Malayalam Cinema Content
             </h2>
             <div className="grid grid-cols-2 gap-4 px-2" role="list">
               <Link
@@ -107,9 +122,9 @@ export default function Home() {
                   </span>
                 </div>
                 <div className="text-center">
-                  <span className="text-sm font-semibold text-gray-900 block">Featured</span>
+                  <span className="text-sm font-semibold text-gray-900 block">Featured Movies</span>
                   <span id="featured-desc" className="text-xs text-gray-500 mt-1 block">
-                    Handpicked movies
+                    Handpicked Malayalam films
                   </span>
                 </div>
               </Link>
@@ -131,7 +146,7 @@ export default function Home() {
                 <div className="text-center">
                   <span className="text-sm font-semibold text-gray-900 block">YouTube Movies</span>
                   <span id="youtube-desc" className="text-xs text-gray-500 mt-1 block">
-                    Free full movies
+                    Free Malayalam full movies
                   </span>
                 </div>
               </Link>
@@ -151,9 +166,9 @@ export default function Home() {
                   </span>
                 </div>
                 <div className="text-center">
-                  <span className="text-sm font-semibold text-gray-900 block">Trailers</span>
+                  <span className="text-sm font-semibold text-gray-900 block">Movie Trailers</span>
                   <span id="trailers-desc" className="text-xs text-gray-500 mt-1 block">
-                    Latest previews
+                    Latest Malayalam previews
                   </span>
                 </div>
               </Link>
@@ -173,9 +188,9 @@ export default function Home() {
                   </span>
                 </div>
                 <div className="text-center">
-                  <span className="text-sm font-semibold text-gray-900 block">News</span>
+                  <span className="text-sm font-semibold text-gray-900 block">Malayalam Movie News</span>
                   <span id="news-desc" className="text-xs text-gray-500 mt-1 block">
-                    Industry updates
+                    Industry updates & reviews
                   </span>
                 </div>
               </Link>
@@ -195,9 +210,9 @@ export default function Home() {
                   </span>
                 </div>
                 <div className="text-center">
-                  <span className="text-sm font-semibold text-gray-900 block">Theater Releases</span>
+                  <span className="text-sm font-semibold text-gray-900 block">Upcoming Malayalam Movies</span>
                   <span id="upcoming-desc" className="text-xs text-gray-500 mt-1 block">
-                    Coming to cinemas near you
+                    Coming to theaters & OTT
                   </span>
                 </div>
               </Link>
@@ -206,7 +221,7 @@ export default function Home() {
 
           <section id="movies" aria-labelledby="movies-heading">
             <h2 id="movies-heading" className="sr-only">
-              Malayalam Movies Collection
+              Malayalam Movies Collection - Watch Online on OTT Platforms
             </h2>
             <MovieGrid />
           </section>
@@ -216,9 +231,14 @@ export default function Home() {
       <footer className="bg-white border-t border-gray-200 mt-auto" role="contentinfo">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <p className="text-sm text-gray-600 text-center md:text-left">
-              © 2024 Malayalam Movies Hub. All rights reserved.
-            </p>
+            <div className="text-center md:text-left">
+              <p className="text-sm text-gray-600 mb-2">
+                © 2024 Malayalam Movies Hub. Your destination for Malayalam movies online.
+              </p>
+              <p className="text-xs text-gray-500">
+                Watch latest Malayalam movies, OTT releases, trailers and movie news
+              </p>
+            </div>
             <nav aria-label="Footer navigation">
               <div className="flex items-center gap-8">
                 <Link

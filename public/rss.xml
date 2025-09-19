@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Malayalam Movies Hub - Latest OTT Releases &amp; Movie News</title>
+    <description>Stay updated with the latest Malayalam movies, OTT releases, trailers, and movie news. Watch Malayalam movies online including Meesha Madhavan, Kumbalangi Nights, Trance, and more.</description>
+    <link>https://malayalammovieshub.com</link>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 09 Jan 2025 12:00:00 GMT</lastBuildDate>
+    <pubDate>Thu, 09 Jan 2025 12:00:00 GMT</pubDate>
+    <ttl>60</ttl>
+    <atom:link href="https://malayalammovieshub.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <image>
+      <url>https://malayalammovieshub.com/logo.png</url>
+      <title>Malayalam Movies Hub</title>
+      <link>https://malayalammovieshub.com</link>
+      <width>144</width>
+      <height>144</height>
+    </image>
+    
+    <!-- Latest Malayalam Movie News -->
+    <item>
+      <title>Lokah: Chapter 1 – Chandra crosses ₹211 CR worldwide - Malayalam cinema's first female superhero shatters records</title>
+      <description>Kalyani Priyadarshan's superhero film sets new global benchmarks for Malayalam cinema with impressive box office collections.</description>
+      <link>https://malayalammovieshub.com/news/1</link>
+      <guid>https://malayalammovieshub.com/news/1</guid>
+      <pubDate>Thu, 12 Sep 2025 12:00:00 GMT</pubDate>
+      <category>Box Office</category>
+      <content:encoded><![CDATA[
+        <p>Lokah: Chapter 1 – Chandra, the first female-led superhero film in Malayalam cinema, has stormed the box office, collecting an impressive ₹211.61 crore worldwide in just 14 days since its release on August 28.</p>
+        <p>The film grossed ₹97.85 crore net in India and ₹96.15 crore overseas, surpassing Mohanlal's Thudarum to become the second highest-grossing Malayalam film internationally.</p>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Mammootty: The Transformative Titan of Malayalam Cinema</title>
+      <description>Malayalam cinema's greatest chameleon, who reinvents himself with every role across four decades of stellar performances.</description>
+      <link>https://malayalammovieshub.com/news/2</link>
+      <guid>https://malayalammovieshub.com/news/2</guid>
+      <pubDate>Fri, 13 Sep 2025 12:00:00 GMT</pubDate>
+      <category>Profiles</category>
+      <content:encoded><![CDATA[
+        <p>For more than four decades, Mammootty has stood as one of Malayalam cinema's most enduring and influential figures. Unlike many superstars across Indian cinema, Mammootty has built his career not on stardom, but on the power of transformation.</p>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Hridayapoorvam Day 16 Box Office: Crosses ₹34.2 CR, Surpasses L2: Empuraan in One Key Metric</title>
+      <description>Mohanlal's comedy-drama shows steady growth despite competition from Lokah with impressive multiplier factor.</description>
+      <link>https://malayalammovieshub.com/news/3</link>
+      <guid>https://malayalammovieshub.com/news/3</guid>
+      <pubDate>Fri, 13 Sep 2025 15:00:00 GMT</pubDate>
+      <category>Box Office</category>
+      <content:encoded><![CDATA[
+        <p>Hridayapoorvam, starring Mohanlal, has entered its third week with a stable performance at the box office, collecting ₹34.2 crore net by day 16.</p>
+      ]]></content:encoded>
+    </item>
+    
+    <!-- Latest Movie Releases -->
+    <item>
+      <title>Watch Meesha Madhavan Malayalam Comedy Full Movie Online</title>
+      <description>Watch the classic Malayalam comedy Meesha Madhavan starring Dileep and Kavya Madhavan. A hilarious tale of a lovable thief and his adventures.</description>
+      <link>https://malayalammovieshub.com/movie/5</link>
+      <guid>https://malayalammovieshub.com/movie/5</guid>
+      <pubDate>Wed, 08 Jan 2025 12:00:00 GMT</pubDate>
+      <category>Comedy Movies</category>
+      <content:encoded><![CDATA[
+        <p>Meesha Madhavan is a beloved Malayalam comedy film starring Dileep and Kavya Madhavan. The movie follows the story of a charming thief and his romantic adventures.</p>
+        <p>Genre: Comedy, Drama | Duration: 2h 23m | Year: 2020</p>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Kumbalangi Nights - Heartwarming Malayalam Family Drama</title>
+      <description>Watch Kumbalangi Nights online - A beautiful story of four brothers in a fishing hamlet. A heartwarming tale of family, love, and redemption.</description>
+      <link>https://malayalammovieshub.com/movie/7</link>
+      <guid>https://malayalammovieshub.com/movie/7</guid>
+      <pubDate>Wed, 08 Jan 2025 11:00:00 GMT</pubDate>
+      <category>Drama Movies</category>
+      <content:encoded><![CDATA[
+        <p>Kumbalangi Nights tells the story of four brothers living in the fishing hamlet of Kumbalangi who share a love-hate relationship with each other.</p>
+        <p>Genre: Drama, Family, Comedy | Duration: 2h 15m | Year: 2019</p>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Trance - Malayalam Psychological Thriller Online</title>
+      <description>Watch Trance Malayalam movie online. A gripping psychological thriller about a motivational speaker caught in religious manipulation and mass psychology.</description>
+      <link>https://malayalammovieshub.com/movie/11</link>
+      <guid>https://malayalammovieshub.com/movie/11</guid>
+      <pubDate>Wed, 08 Jan 2025 10:00:00 GMT</pubDate>
+      <category>Thriller Movies</category>
+      <content:encoded><![CDATA[
+        <p>Trance is a psychological thriller that follows Viju Prasad, a motivational speaker who gets caught up in the dark world of religious manipulation.</p>
+        <p>Genre: Thriller, Psychological, Drama | Duration: 2h 20m | Year: 2020</p>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Ayyappanum Koshiyum - Malayalam Action Drama Full Movie</title>
+      <description>Watch Ayyappanum Koshiyum online starring Prithviraj and Biju Menon. An intense action drama exploring ego clashes and power dynamics.</description>
+      <link>https://malayalammovieshub.com/movie/31</link>
+      <guid>https://malayalammovieshub.com/movie/31</guid>
+      <pubDate>Wed, 08 Jan 2025 09:00:00 GMT</pubDate>
+      <category>Action Movies</category>
+      <content:encoded><![CDATA[
+        <p>Ayyappanum Koshiyum is a gripping action drama that explores the ego clash between a police officer and a retired havildar.</p>
+        <p>Genre: Action, Drama | Duration: 2h 51m | Starring: Prithviraj, Biju Menon</p>
+      ]]></content:encoded>
+    </item>
+    
+    <!-- Latest Trailers -->
+    <item>
+      <title>Kalamkaval Official Teaser - Mammootty | Vinayakan</title>
+      <description>Watch the official teaser of Kalamkaval starring Mammootty and Vinayakan. Directed by Jithin K Jose and presented by MammoottyKampany.</description>
+      <link>https://malayalammovieshub.com/trailer/2</link>
+      <guid>https://malayalammovieshub.com/trailer/2</guid>
+      <pubDate>Wed, 28 Aug 2025 12:00:00 GMT</pubDate>
+      <category>Movie Trailers</category>
+      <content:encoded><![CDATA[
+        <p>The official teaser for Kalamkaval featuring Mammootty and Vinayakan has been released. The film is directed by Jithin K Jose.</p>
+        <p>Duration: 0:51 | Views: 1.5M | Release Date: 2025-08-28</p>
+      ]]></content:encoded>
+    </item>
+  </channel>
+</rss>

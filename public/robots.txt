@@ -3,20 +3,62 @@ Allow: /
 
 # Sitemap
 Sitemap: https://malayalammovieshub.com/sitemap.xml
+Sitemap: https://malayalammovieshub.com/sitemap-movies.xml
+Sitemap: https://malayalammovieshub.com/sitemap-news.xml
 
 # Crawl-delay for better server performance
 Crawl-delay: 1
 
-# Block access to admin areas (if any)
+# Block access to admin areas and API routes
 Disallow: /admin/
 Disallow: /api/
+Disallow: /_next/
+Disallow: /private/
 
-# Allow all major search engines
+# Allow important movie and category pages for SEO
+Allow: /movie/
+Allow: /search/
+Allow: /category/
+Allow: /news/
+Allow: /trailer/
+
+# Allow all major search engines with specific instructions
 User-agent: Googlebot
 Allow: /
+Crawl-delay: 1
 
 User-agent: Bingbot
 Allow: /
+Crawl-delay: 1
 
 User-agent: Slurp
 Allow: /
+Crawl-delay: 1
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 2
+
+# Social media crawlers
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# Block unwanted bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /

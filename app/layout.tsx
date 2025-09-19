@@ -14,8 +14,28 @@ export const metadata: Metadata = {
     template: "%s | Malayalam Movies Hub",
   },
   description:
-    "Discover the latest Malayalam movies released on OTT platforms like Netflix, Amazon Prime, Disney+ Hotstar. Watch trailers, read reviews, and find your next favorite Malayalam film.",
+    "Watch latest Malayalam movies online, OTT releases on Netflix, Amazon Prime, Disney+ Hotstar. Find Meesha Madhavan, Kumbalangi Nights, Trance, Ayyappanum Koshiyum and more Malayalam films with trailers, reviews and news.",
   keywords: [
+    "malayalam movies online watch",
+    "latest released malayalam movies ott",
+    "latest released movies in malayalam",
+    "ott malayalam movies",
+    "malayalam shortfilms to watch",
+    "malayalam movie news",
+    "Latest OTT Released Malayalam Movies September 2025",
+    "meesha madhavan malayalam movie",
+    "kumbalangi nights watch online",
+    "trance malayalam movie",
+    "ayyappanum koshiyum full movie",
+    "angamaly diaries malayalam",
+    "action hero biju malayalam",
+    "in harihar nagar comedy",
+    "mammootty movies online",
+    "mohanlal movies ott",
+    "dileep comedy movies",
+    "nivin pauly films",
+    "fahadh faasil movies",
+    "prithviraj malayalam movies",
     "Malayalam movies",
     "OTT releases",
     "Malayalam cinema",
@@ -27,7 +47,17 @@ export const metadata: Metadata = {
     "film trailers",
     "Mollywood",
     "Malayalam films 2024",
+    "Malayalam films 2025",
     "streaming movies",
+    "malayalam full movies",
+    "malayalam movies with subtitles",
+    "best malayalam movies",
+    "new malayalam movies",
+    "malayalam blockbuster movies",
+    "malayalam comedy movies",
+    "malayalam thriller movies",
+    "malayalam drama movies",
+    "malayalam action movies",
   ],
   authors: [{ name: "Daris Mathew" }],
   creator: "Daris Mathew",
@@ -42,9 +72,9 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Malayalam Movies Hub - Latest OTT Releases & Movie Reviews",
+    title: "Malayalam Movies Hub - Watch Latest OTT Releases Online",
     description:
-      "Discover the latest Malayalam movies released on OTT platforms. Watch trailers, read reviews, and find your next favorite Malayalam film.",
+      "Watch latest Malayalam movies online including Meesha Madhavan, Kumbalangi Nights, Trance, Ayyappanum Koshiyum. Find OTT releases, trailers, reviews and Malayalam movie news.",
     url: "https://malayalammovieshub.com",
     siteName: "Malayalam Movies Hub",
     images: [
@@ -52,7 +82,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Malayalam Movies Hub - Latest OTT Releases",
+        alt: "Malayalam Movies Hub - Latest OTT Releases & Malayalam Films Online",
       },
     ],
     locale: "en_US",
@@ -60,8 +90,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Malayalam Movies Hub - Latest OTT Releases",
-    description: "Discover the latest Malayalam movies released on OTT platforms",
+    title: "Malayalam Movies Hub - Latest OTT Malayalam Movies",
+    description: "Watch latest Malayalam movies online, OTT releases, trailers and movie news",
     images: ["/og-image.png"],
     creator: "@malayalammovieshub",
   },
@@ -88,6 +118,10 @@ export const metadata: Metadata = {
     "apple-mobile-web-app-status-bar-style": "default",
     "msapplication-TileColor": "#3b82f6",
     "msapplication-config": "/browserconfig.xml",
+    "geo.region": "IN-KL",
+    "geo.placename": "Kerala, India",
+    language: "Malayalam, English",
+    "content-language": "en, ml",
   },
     generator: 'v0.app'
 }
@@ -112,7 +146,7 @@ export default function RootLayout({
                   "@type": "WebSite",
                   "@id": "https://malayalammovieshub.com/#website",
                   name: "Malayalam Movies Hub",
-                  description: "Discover the latest Malayalam movies released on OTT platforms",
+                  description: "Watch latest Malayalam movies online, OTT releases, trailers and movie news",
                   url: "https://malayalammovieshub.com",
                   inLanguage: "en-US",
                   potentialAction: {
@@ -128,7 +162,26 @@ export default function RootLayout({
                     "@type": "Organization",
                     "@id": "https://malayalammovieshub.com/#organization",
                   },
-                  copyrightYear: "2024",
+                  copyrightYear: "2025",
+                  keywords:
+                    "malayalam movies online watch, latest released malayalam movies ott, ott malayalam movies, malayalam movie news, meesha madhavan, kumbalangi nights, trance malayalam movie",
+                  about: [
+                    {
+                      "@type": "Thing",
+                      name: "Malayalam Cinema",
+                      description: "Film industry of Kerala, India producing movies in Malayalam language",
+                    },
+                    {
+                      "@type": "Thing",
+                      name: "OTT Platforms",
+                      description: "Over-the-top streaming services for Malayalam movies",
+                    },
+                    {
+                      "@type": "Thing",
+                      name: "Malayalam Movie Reviews",
+                      description: "Reviews and ratings of latest Malayalam films",
+                    },
+                  ],
                 },
                 {
                   "@type": "Organization",
@@ -153,15 +206,38 @@ export default function RootLayout({
                     "https://facebook.com/malayalammovieshub",
                     "https://instagram.com/malayalammovieshub",
                   ],
-                  foundingDate: "2024",
+                  foundingDate: "2025",
                   description: "Your ultimate destination for Malayalam cinema and OTT releases",
+                  hasOfferCatalog: {
+                    "@type": "OfferCatalog",
+                    name: "Malayalam Movies Collection",
+                    itemListElement: [
+                      {
+                        "@type": "Offer",
+                        itemOffered: {
+                          "@type": "Service",
+                          name: "Malayalam Movie Streaming",
+                          description: "Watch latest Malayalam movies online",
+                        },
+                      },
+                      {
+                        "@type": "Offer",
+                        itemOffered: {
+                          "@type": "Service",
+                          name: "Movie Reviews & News",
+                          description: "Latest Malayalam movie reviews and entertainment news",
+                        },
+                      },
+                    ],
+                  },
                 },
                 {
                   "@type": "WebPage",
                   "@id": "https://malayalammovieshub.com/#webpage",
                   url: "https://malayalammovieshub.com",
-                  name: "Malayalam Movies Hub - Latest OTT Releases",
-                  description: "Discover the latest Malayalam movies released on OTT platforms",
+                  name: "Malayalam Movies Hub - Watch Latest OTT Releases Online",
+                  description:
+                    "Watch latest Malayalam movies online including popular films like Meesha Madhavan, Kumbalangi Nights, Trance, Ayyappanum Koshiyum and more OTT releases",
                   inLanguage: "en-US",
                   isPartOf: {
                     "@id": "https://malayalammovieshub.com/#website",
@@ -175,6 +251,98 @@ export default function RootLayout({
                     "@type": "ImageObject",
                     url: "https://malayalammovieshub.com/og-image.png",
                   },
+                  mainEntity: {
+                    "@type": "ItemList",
+                    name: "Popular Malayalam Movies",
+                    description: "Collection of popular Malayalam movies available for online viewing",
+                    numberOfItems: 20,
+                    itemListElement: [
+                      {
+                        "@type": "ListItem",
+                        position: 1,
+                        item: {
+                          "@type": "Movie",
+                          name: "Meesha Madhavan",
+                          genre: ["Comedy", "Drama"],
+                          inLanguage: "ml",
+                          countryOfOrigin: "IN",
+                        },
+                      },
+                      {
+                        "@type": "ListItem",
+                        position: 2,
+                        item: {
+                          "@type": "Movie",
+                          name: "Kumbalangi Nights",
+                          genre: ["Drama", "Family", "Comedy"],
+                          inLanguage: "ml",
+                          countryOfOrigin: "IN",
+                        },
+                      },
+                      {
+                        "@type": "ListItem",
+                        position: 3,
+                        item: {
+                          "@type": "Movie",
+                          name: "Trance",
+                          genre: ["Thriller", "Psychological", "Drama"],
+                          inLanguage: "ml",
+                          countryOfOrigin: "IN",
+                        },
+                      },
+                      {
+                        "@type": "ListItem",
+                        position: 4,
+                        item: {
+                          "@type": "Movie",
+                          name: "Ayyappanum Koshiyum",
+                          genre: ["Action", "Drama"],
+                          inLanguage: "ml",
+                          countryOfOrigin: "IN",
+                        },
+                      },
+                      {
+                        "@type": "ListItem",
+                        position: 5,
+                        item: {
+                          "@type": "Movie",
+                          name: "Angamaly Diaries",
+                          genre: ["Drama", "Action"],
+                          inLanguage: "ml",
+                          countryOfOrigin: "IN",
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  "@type": "FAQPage",
+                  mainEntity: [
+                    {
+                      "@type": "Question",
+                      name: "Where can I watch Malayalam movies online?",
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "You can watch Malayalam movies online on OTT platforms like Netflix, Amazon Prime Video, Disney+ Hotstar, and YouTube. Our site provides links and information about the latest Malayalam movie releases on these platforms.",
+                      },
+                    },
+                    {
+                      "@type": "Question",
+                      name: "What are the latest released Malayalam movies on OTT?",
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "The latest OTT released Malayalam movies include recent hits and classics. Check our homepage for the most current releases on Netflix, Amazon Prime, and other streaming platforms.",
+                      },
+                    },
+                    {
+                      "@type": "Question",
+                      name: "Can I watch Meesha Madhavan online?",
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "Yes, Meesha Madhavan starring Dileep and Kavya Madhavan is available to watch online. Check our YouTube movies section for viewing options.",
+                      },
+                    },
+                  ],
                 },
               ],
             }),
@@ -198,6 +366,13 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <meta name="color-scheme" content="light" />
         <meta name="format-detection" content="telephone=no, date=no, email=no, address=no" />
+        <meta name="geo.region" content="IN-KL" />
+        <meta name="geo.placename" content="Kerala, India" />
+        <meta name="language" content="Malayalam, English" />
+        <meta name="content-language" content="en, ml" />
+        <meta name="rating" content="general" />
+        <meta name="distribution" content="global" />
+        <meta name="revisit-after" content="1 days" />
 
         <link rel="dns-prefetch" href="//pl26236383.revenuecpmgate.com" />
         <link rel="dns-prefetch" href="//www.revenuecpmgate.com" />
